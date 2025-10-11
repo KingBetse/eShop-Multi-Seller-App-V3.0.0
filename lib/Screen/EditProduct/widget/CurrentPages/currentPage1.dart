@@ -9,15 +9,14 @@ import 'package:sellermultivendor/Screen/EditProduct/widget/getIconSelectionDesi
 import 'package:sellermultivendor/Widget/ProductDescription.dart';
 import '../../EditProduct.dart';
 
-currentPage1(
-  BuildContext context,
-  Function update,
-) {
+currentPage1(BuildContext context, Function update) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       getPrimaryCommanText(
-          "PRODUCTNAME_LBL".translate(context: context), false),
+        "PRODUCTNAME_LBL".translate(context: context),
+        false,
+      ),
       getCommanSizedBox(),
       getCommanInputTextField(
         "PRODUCTHINT_TXT".translate(context: context),
@@ -28,96 +27,104 @@ currentPage1(
         context,
       ),
       getCommanSizedBox(),
-      Row(
-        children: [
-          getPrimaryCommanText("Tags".translate(context: context), false),
-          const SizedBox(width: 10),
-          Flexible(
-            fit: FlexFit.loose,
-            child: getSecondaryCommanText(
-              "(These tags help you in search result)"
-                  .translate(context: context),
-            ),
-          ),
-        ],
-      ),
-      getCommanSizedBox(),
-      getCommanInputTextField(
-        "Type in some tags for example AC, Cooler, Flagship Smartphones, Mobiles, Sport etc.."
-            .translate(context: context),
-        3,
-        0.06,
-        1,
-        2,
-        context,
-      ),
-      getCommanSizedBox(),
+      // Row(
+      //   children: [
+      //     getPrimaryCommanText("Tags".translate(context: context), false),
+      //     const SizedBox(width: 10),
+      //     Flexible(
+      //       fit: FlexFit.loose,
+      //       child: getSecondaryCommanText(
+      //         "(These tags help you in search result)"
+      //             .translate(context: context),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      // getCommanSizedBox(),
+      // getCommanInputTextField(
+      //   "Type in some tags for example AC, Cooler, Flagship Smartphones, Mobiles, Sport etc.."
+      //       .translate(context: context),
+      //   3,
+      //   0.06,
+      //   1,
+      //   2,
+      //   context,
+      // ),
+      // getCommanSizedBox(),
       getPrimaryCommanText("ProductType".translate(context: context), false),
       getCommanSizedBox(),
       getIconSelectionDesing(
-          "Select Tax".translate(context: context), 15, context, update),
-      getCommanSizedBox(),
-      getPrimaryCommanText("Select Tax".translate(context: context), false),
-      getCommanSizedBox(),
-      getIconSelectionDesing(
         "Select Tax".translate(context: context),
-        1,
+        15,
         context,
         update,
       ),
-      getCommanSizedBox(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getPrimaryCommanText(
-              "Select Indicator".translate(context: context), false)
-          : Container(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getCommanSizedBox()
-          : Container(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getIconSelectionDesing(
-              "Select Indicator".translate(context: context),
-              2,
-              context,
-              update,
-            )
-          : Container(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getCommanSizedBox()
-          : Container(),
-      getPrimaryCommanText("Made In".translate(context: context), false),
-      getCommanSizedBox(),
-      getIconSelectionDesing(
-        "Made In".translate(context: context),
-        3,
-        context,
-        update,
-      ),
-      getCommanSizedBox(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getPrimaryCommanText('HSN Code'.translate(context: context), false)
-          : Container(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getCommanSizedBox()
-          : Container(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getCommanInputTextField(
-              'HSN Code'.translate(context: context),
-              16,
-              0.06,
-              1,
-              2,
-              context,
-            )
-          : Container(),
-      editProvider!.currentSellectedProductIsPysical
-          ? getCommanSizedBox()
-          : Container(),
+      // getCommanSizedBox(),
+      // getPrimaryCommanText("Select Tax".translate(context: context), false),
+      // getCommanSizedBox(),
+      // getIconSelectionDesing(
+      //   "Select Tax".translate(context: context),
+      //   1,
+      //   context,
+      //   update,
+      // ),
+      // getCommanSizedBox(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getPrimaryCommanText(
+      //         "Select Indicator".translate(context: context),
+      //         false,
+      //       )
+      //     : Container(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getCommanSizedBox()
+      //     : Container(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getIconSelectionDesing(
+      //         "Select Indicator".translate(context: context),
+      //         2,
+      //         context,
+      //         update,
+      //       )
+      //     : Container(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getCommanSizedBox()
+      //     : Container(),
+      // getPrimaryCommanText("Made In".translate(context: context), false),
+      // getCommanSizedBox(),
+      // getIconSelectionDesing(
+      //   "Made In".translate(context: context),
+      //   3,
+      //   context,
+      //   update,
+      // ),
+      // getCommanSizedBox(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getPrimaryCommanText('HSN Code'.translate(context: context), false)
+      //     : Container(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getCommanSizedBox()
+      //     : Container(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getCommanInputTextField(
+      //         'HSN Code'.translate(context: context),
+      //         16,
+      //         0.06,
+      //         1,
+      //         2,
+      //         context,
+      //       )
+      //     : Container(),
+      // editProvider!.currentSellectedProductIsPysical
+      //     ? getCommanSizedBox()
+      //     : Container(),
       Row(
         children: [
           Expanded(
             flex: 2,
             child: getPrimaryCommanText(
-                "ShortDescription".translate(context: context), true),
+              "ShortDescription".translate(context: context),
+              true,
+            ),
           ),
         ],
       ),
@@ -132,14 +139,16 @@ currentPage1(
                 decoration: BoxDecoration(
                   color: grey1,
                   borderRadius: BorderRadius.circular(circularBorderRadius5),
-                  border: Border.all(
-                    color: black.withValues(alpha: 0.1),
-                  ),
+                  border: Border.all(color: black.withValues(alpha: 0.1)),
                 ),
                 width: width,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      top: 8, left: 8, right: 8, bottom: 28),
+                    top: 8,
+                    left: 8,
+                    right: 8,
+                    bottom: 28,
+                  ),
                   child: Text("Description".translate(context: context)),
                 ),
               ),
@@ -148,25 +157,9 @@ currentPage1(
                   context,
                   CupertinoPageRoute<String>(
                     builder: (context) => ProductDescription(
-                        editProvider!.sortDescription ?? "",
-                        "Product Sort Description".translate(context: context)),
-                  ),
-                ).then((changed) {
-                  if (changed?.trim().isNotEmpty ?? false) {
-                    editProvider!.sortDescription = changed;
-                  }
-                  update();
-                });
-              })
-          : GestureDetector(
-              child: getDescription(2),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute<String>(
-                    builder: (context) => ProductDescription(
-                        editProvider!.sortDescription ?? "",
-                        "Product Sort Description".translate(context: context)),
+                      editProvider!.sortDescription ?? "",
+                      "Product Sort Description".translate(context: context),
+                    ),
                   ),
                 ).then((changed) {
                   if (changed?.trim().isNotEmpty ?? false) {
@@ -176,6 +169,60 @@ currentPage1(
                 });
               },
             )
+          : GestureDetector(
+              child: getDescription(2),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute<String>(
+                    builder: (context) => ProductDescription(
+                      editProvider!.sortDescription ?? "",
+                      "Product Sort Description".translate(context: context),
+                    ),
+                  ),
+                ).then((changed) {
+                  if (changed?.trim().isNotEmpty ?? false) {
+                    editProvider!.sortDescription = changed;
+                  }
+                  update();
+                });
+              },
+            ),
+      getCommanSizedBox(),
+      getPrimaryCommanText(
+        "selected category".translate(context: context),
+        false,
+      ),
+      getCommanSizedBox(),
+      getIconSelectionDesing(
+        "not Selected Yet!(ex. vegetable, Fashion)".translate(context: context),
+        5,
+        context,
+        update,
+      ),
+      getCommanSizedBox(),
+      getPrimaryCommanText("Select Brand".translate(context: context), false),
+      getCommanSizedBox(),
+      getIconSelectionDesing(
+        "not Selected Yet!(ex. TaTa, Apple, MicroSoft)".translate(
+          context: context,
+        ),
+        13,
+        context,
+        update,
+      ),
+      getCommanSizedBox(),
+      getPrimaryCommanText(
+        "Select PickUp Location".translate(context: context),
+        false,
+      ),
+      getCommanSizedBox(),
+      getIconSelectionDesing(
+        "PickUp Location Not Selected Yet".translate(context: context),
+        16,
+        context,
+        update,
+      ),
     ],
   );
 }

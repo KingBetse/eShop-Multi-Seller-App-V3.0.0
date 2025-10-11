@@ -19,73 +19,65 @@ getCommanInputTextField(
     decoration: BoxDecoration(
       color: grey1,
       borderRadius: BorderRadius.circular(circularBorderRadius5),
-      border: Border.all(
-        color: grey2,
-        width: 1,
-      ),
+      border: Border.all(color: grey2, width: 1),
     ),
     width: width * widthvalue,
     height: height * heightvalue,
     child: Padding(
-      padding: const EdgeInsets.only(
-        left: 8,
-        right: 8,
-      ),
+      padding: const EdgeInsets.only(left: 8, right: 8),
       child: TextFormField(
         onFieldSubmitted: (v) {
-          FocusScope.of(context).requestFocus(
-            () {
-              if (index == 1) {
-                return addProvider!.productFocus;
-              } else if (index == 2) {
-                return addProvider!.sortDescriptionFocus;
-              } else if (index == 3) {
-                return addProvider!.tagFocus;
-              } else if (index == 4) {
-                return addProvider!.totalAllowFocus;
-              } else if (index == 5) {
-                return addProvider!.minOrderFocus;
-              } else if (index == 6) {
-                return addProvider!.quantityStepSizeFocus;
-              } else if (index == 7) {
-                return addProvider!.warrantyPeriodFocus;
-              } else if (index == 8) {
-                return addProvider!.guaranteePeriodFocus;
-              } else if (index == 9) {
-                return addProvider!.vidioTypeFocus;
-              } else if (index == 10) {
-                return addProvider!.simpleProductPriceFocus;
-              } else if (index == 11) {
-                return addProvider!.simpleProductSpecialPriceFocus;
-              } else if (index == 12) {
-                return addProvider!.simpleProductSKUFocus;
-              } else if (index == 13) {
-                return addProvider!.simpleProductTotalStockFocus;
-              } else if (index == 14) {
-                return addProvider!.variountProductSKUFocus;
-              } else if (index == 15) {
-                return addProvider!.variountProductTotalStockFocus;
-              } else if (index == 16) {
-                return addProvider!.hsnCodeFucosNode;
-              } else if (index == 17) {
-                return addProvider!.digitalPriceFocus;
-              } else if (index == 18) {
-                return addProvider!.digitalSpecialFocus;
-              } else if (index == 19) {
-                return addProvider!.selfHostedFocus;
-              } else if (index == 20) {
-                return addProvider!.weightFocus;
-              } else if (index == 21) {
-                return addProvider!.heightFocus;
-              } else if (index == 22) {
-                return addProvider!.breadthFocus;
-              } else if (index == 23) {
-                return addProvider!.lengthFocus;
-              } else if (index == 24) {
-                return addProvider!.lowStockLimitFocus;
-              }
-            }(),
-          );
+          FocusScope.of(context).requestFocus(() {
+            if (index == 1) {
+              return addProvider!.productFocus;
+            } else if (index == 2) {
+              return addProvider!.sortDescriptionFocus;
+            } else if (index == 3) {
+              return addProvider!.tagFocus;
+            } else if (index == 4) {
+              return addProvider!.totalAllowFocus;
+            } else if (index == 5) {
+              return addProvider!.minOrderFocus;
+            } else if (index == 6) {
+              return addProvider!.quantityStepSizeFocus;
+            } else if (index == 7) {
+              return addProvider!.warrantyPeriodFocus;
+            } else if (index == 8) {
+              return addProvider!.guaranteePeriodFocus;
+            } else if (index == 9) {
+              return addProvider!.vidioTypeFocus;
+            } else if (index == 10) {
+              return addProvider!.simpleProductPriceFocus;
+            } else if (index == 11) {
+              return addProvider!.simpleProductSpecialPriceFocus;
+            } else if (index == 12) {
+              return addProvider!.simpleProductSKUFocus;
+            } else if (index == 13) {
+              return addProvider!.simpleProductTotalStockFocus;
+            } else if (index == 14) {
+              return addProvider!.variountProductSKUFocus;
+            } else if (index == 15) {
+              return addProvider!.variountProductTotalStockFocus;
+            } else if (index == 16) {
+              return addProvider!.hsnCodeFucosNode;
+            } else if (index == 17) {
+              return addProvider!.digitalPriceFocus;
+            } else if (index == 18) {
+              return addProvider!.digitalSpecialFocus;
+            } else if (index == 19) {
+              return addProvider!.selfHostedFocus;
+            } else if (index == 20) {
+              return addProvider!.weightFocus;
+            } else if (index == 21) {
+              return addProvider!.heightFocus;
+            } else if (index == 22) {
+              return addProvider!.breadthFocus;
+            } else if (index == 23) {
+              return addProvider!.lengthFocus;
+            } else if (index == 24) {
+              return addProvider!.lowStockLimitFocus;
+            }
+          }());
         },
         focusNode: () {
           if (index == 1) {
@@ -140,10 +132,7 @@ getCommanInputTextField(
         }(),
         readOnly: false,
         textInputAction: TextInputAction.newline,
-        style: const TextStyle(
-          color: black,
-          fontWeight: FontWeight.normal,
-        ),
+        style: const TextStyle(color: black, fontWeight: FontWeight.normal),
         controller: () {
           if (index == 1) {
             return addProvider!.productNameControlller;
@@ -199,26 +188,28 @@ getCommanInputTextField(
         keyboardType: textType == 1
             ? TextInputType.multiline
             : textType == 2
-                ? TextInputType.text
-                : TextInputType.number,
+            ? TextInputType.text
+            : TextInputType.number,
         onChanged: (value) {
           if (index == 1) {
             addProvider!.setproductName(value);
           } else if (index == 2) {
             addProvider!.setsortDescription(value);
-          } else if (index == 3) {
-            addProvider!.settags(value);
-          } else if (index == 4) {
-            addProvider!.settotalAllowQuantity(value);
-          } else if (index == 5) {
-            addProvider!.setminOrderQuantity(value);
-          } else if (index == 6) {
-            addProvider!.setquantityStepSize(value);
-          } else if (index == 7) {
-            addProvider!.setwarrantyPeriod(value);
-          } else if (index == 8) {
-            addProvider!.setguaranteePeriod(value);
-          } else if (index == 9) {
+          }
+          // else if (index == 3) {
+          //   addProvider!.settags(value);
+          // } else if (index == 4) {
+          //   addProvider!.settotalAllowQuantity(value);
+          // } else if (index == 5) {
+          //   addProvider!.setminOrderQuantity(value);
+          // } else if (index == 6) {
+          //   addProvider!.setquantityStepSize(value);
+          // } else if (index == 7) {
+          //   addProvider!.setwarrantyPeriod(value);
+          // } else if (index == 8) {
+          //   addProvider!.setguaranteePeriod(value);
+          // }
+          else if (index == 9) {
             addProvider!.videoUrl = value;
           } else if (index == 10) {
             addProvider!.simpleproductPrice = value;

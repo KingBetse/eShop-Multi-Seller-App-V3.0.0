@@ -49,10 +49,7 @@ import '../MediaUpload/Media.dart';
 class EditProduct extends StatefulWidget {
   final Product? model;
 
-  const EditProduct({
-    super.key,
-    this.model,
-  });
+  const EditProduct({super.key, this.model});
 
   @override
   State<EditProduct> createState() => _EditProductState();
@@ -68,18 +65,16 @@ class _EditProductState extends State<EditProduct>
     } on TickerCanceled {}
   }
 
-//------------------------------------------------------------------------------
-//========================= InIt MEthod ========================================
+  //------------------------------------------------------------------------------
+  //========================= InIt MEthod ========================================
   getAllData() async {
     isNetworkAvail = await isNetworkAvailable();
     if (isNetworkAvail) {
-      await context.read<BrandProvider>().setBrands(false).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<BrandProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<BrandProvider>().setBrands(false).then((value) {
+        if (value == true) {
+          setSnackbar(context.read<BrandProvider>().errorMessage, context);
+        }
+      });
       if (mounted && editProvider!.brandState != null) {
         if (mounted) {
           setState(() {});
@@ -89,116 +84,100 @@ class _EditProductState extends State<EditProduct>
       await context
           .read<PickUpLocationProvider>()
           .getPickUpLocations(context, 2)
-          .then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<PickUpLocationProvider>().errorMessage, context);
-          }
-        },
-      );
+          .then((value) {
+            if (value == true) {
+              setSnackbar(
+                context.read<PickUpLocationProvider>().errorMessage,
+                context,
+              );
+            }
+          });
       if (mounted && editProvider!.pickUpLocationState != null) {
         if (mounted) {
           setState(() {});
         }
       }
       //getBrands();
-      await context.read<CountryProvider>().setCountrys(false, false).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<CountryProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<CountryProvider>().setCountrys(false, false).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<CountryProvider>().errorMessage, context);
+        }
+      });
       //get zipCode
       await context
           .read<ZipcodeProvider>()
           .setZipCode(ProductAction.editProduct)
-          .then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<ZipcodeProvider>().errorMessage, context);
-          }
-        },
-      );
-      await context
-          .read<CategoryProvider>()
-          .setCategory(
-            false,
-            context,
-          )
-          .then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<CategoryProvider>().errorMessage, context);
-          }
-        },
-      );
-      await context.read<TaxProvider>().setTax(false).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<TaxProvider>().errorMessage, context);
-          } else {
-            //tax_id
-            if (widget.model!.taxId != null) {
-              List<String> taxIds = widget.model!.taxId?.split(",") ?? [];
-              editProvider!.selectedTax.clear();
-              for (int i = 0; i < taxIds.length; i++) {
-                if (editProvider!.taxesList
-                    .any((element) => element.id == taxIds[i].trim())) {
-                  editProvider!.selectedTax.add(editProvider!.taxesList[i]);
-                }
-              }
-              if (mounted) {
-                setState(() {});
+          .then((value) {
+            if (value == true) {
+              setSnackbar(
+                context.read<ZipcodeProvider>().errorMessage,
+                context,
+              );
+            }
+          });
+      await context.read<CategoryProvider>().setCategory(false, context).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<CategoryProvider>().errorMessage, context);
+        }
+      });
+      await context.read<TaxProvider>().setTax(false).then((value) {
+        if (value == true) {
+          setSnackbar(context.read<TaxProvider>().errorMessage, context);
+        } else {
+          //tax_id
+          if (widget.model!.taxId != null) {
+            List<String> taxIds = widget.model!.taxId?.split(",") ?? [];
+            editProvider!.selectedTax.clear();
+            for (int i = 0; i < taxIds.length; i++) {
+              if (editProvider!.taxesList.any(
+                (element) => element.id == taxIds[i].trim(),
+              )) {
+                editProvider!.selectedTax.add(editProvider!.taxesList[i]);
               }
             }
+            if (mounted) {
+              setState(() {});
+            }
           }
-        },
-      );
+        }
+      });
 
       // get attribute set
-      await context.read<AttributeProvider>().setAttributeSet(false).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<AttributeProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<AttributeProvider>().setAttributeSet(false).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<AttributeProvider>().errorMessage, context);
+        }
+      });
       // get attribute
-      await context.read<AttributeProvider>().setAttributes(false).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<AttributeProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<AttributeProvider>().setAttributes(false).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<AttributeProvider>().errorMessage, context);
+        }
+      });
       // get attribute value
-      await context.read<AttributeProvider>().setAttributesValue(false).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<AttributeProvider>().errorMessage, context);
-          }
-        },
-      );
-      Future.delayed(
-        const Duration(seconds: 3),
-        () {
-          initializaAllvariables();
-        },
-      );
-      setState(
-        () {},
-      );
+      await context.read<AttributeProvider>().setAttributesValue(false).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<AttributeProvider>().errorMessage, context);
+        }
+      });
+      Future.delayed(const Duration(seconds: 3), () {
+        initializaAllvariables();
+      });
+      setState(() {});
     } else {
-      setState(
-        () {
-          isNetworkAvail = false;
-        },
-      );
+      setState(() {
+        isNetworkAvail = false;
+      });
     }
   }
 
@@ -216,8 +195,9 @@ class _EditProductState extends State<EditProduct>
     // editProvider!.uploadedVideoName = "";
     editProvider!.countryScrollController.addListener(_scrollListener);
     editProvider!.brandScrollController.addListener(_brandScrollListener);
-    editProvider!.pickUpLocationScrollController
-        .addListener(_pickUpScrollListener);
+    editProvider!.pickUpLocationScrollController.addListener(
+      _pickUpScrollListener,
+    );
     editProvider!.uploadedVideoName = widget.model!.video;
     getAllData();
     editProvider!.buttonController = AnimationController(
@@ -228,18 +208,13 @@ class _EditProductState extends State<EditProduct>
     editProvider!.otherPhotos = [];
     editProvider!.showOtherImages = [];
 
-    editProvider!.buttonSqueezeanimation = Tween(
-      begin: double.maxFinite,
-      end: 50.0,
-    ).animate(
-      CurvedAnimation(
-        parent: editProvider!.buttonController!,
-        curve: const Interval(
-          0.0,
-          0.150,
-        ),
-      ),
-    );
+    editProvider!.buttonSqueezeanimation =
+        Tween(begin: double.maxFinite, end: 50.0).animate(
+          CurvedAnimation(
+            parent: editProvider!.buttonController!,
+            curve: const Interval(0.0, 0.150),
+          ),
+        );
     editProvider!.currentPage = 1;
     super.initState();
   }
@@ -255,23 +230,22 @@ class _EditProductState extends State<EditProduct>
           editProvider!.isLoadingMoreCountry = true;
           editProvider!.isProgress = true;
         });
-        await context.read<CountryProvider>().setCountrys(false, false).then(
-          (value) {
-            if (value == true) {
-              setSnackbar(
-                  context.read<CountryProvider>().errorMessage, context);
-              editProvider!.countryState!(() {
-                editProvider!.isLoadingMoreCountry = false;
-                editProvider!.isProgress = false;
-              });
-            } else {
-              editProvider!.countryState!(() {
-                editProvider!.isLoadingMoreCountry = false;
-                editProvider!.isProgress = false;
-              });
-            }
-          },
-        );
+        await context.read<CountryProvider>().setCountrys(false, false).then((
+          value,
+        ) {
+          if (value == true) {
+            setSnackbar(context.read<CountryProvider>().errorMessage, context);
+            editProvider!.countryState!(() {
+              editProvider!.isLoadingMoreCountry = false;
+              editProvider!.isProgress = false;
+            });
+          } else {
+            editProvider!.countryState!(() {
+              editProvider!.isLoadingMoreCountry = false;
+              editProvider!.isProgress = false;
+            });
+          }
+        });
       }
     }
   }
@@ -305,7 +279,9 @@ class _EditProductState extends State<EditProduct>
   _pickUpScrollListener() async {
     if (editProvider!.pickUpLocationScrollController.offset >=
             editProvider!
-                .pickUpLocationScrollController.position.maxScrollExtent &&
+                .pickUpLocationScrollController
+                .position
+                .maxScrollExtent &&
         !editProvider!.pickUpLocationScrollController.position.outOfRange) {
       if (mounted) {
         setState(() {});
@@ -320,11 +296,13 @@ class _EditProductState extends State<EditProduct>
             .read<PickUpLocationProvider>()
             .getPickUpLocations(context, 2)
             .then((value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<PickUpLocationProvider>().errorMessage, context);
-          }
-        });
+              if (value == true) {
+                setSnackbar(
+                  context.read<PickUpLocationProvider>().errorMessage,
+                  context,
+                );
+              }
+            });
         if (mounted && editProvider!.pickUpLocationState != null) {
           editProvider!.pickUpLocationState!(() {});
         }
@@ -344,13 +322,13 @@ class _EditProductState extends State<EditProduct>
     (widget.model!.shortDescription == null)
         ? ""
         : editProvider!.sortDescriptionControlller.text =
-            widget.model!.shortDescription!;
+              widget.model!.shortDescription!;
     editProvider!.sortDescription =
         editProvider!.sortDescriptionControlller.text;
     (widget.model!.extraDescription == null)
         ? ""
         : editProvider!.extraDescriptionControlller.text =
-            widget.model!.extraDescription!;
+              widget.model!.extraDescription!;
     editProvider!.extraDescription =
         editProvider!.extraDescriptionControlller.text;
     // Tags
@@ -426,8 +404,9 @@ class _EditProductState extends State<EditProduct>
     //is_returnable
     if (widget.model!.isReturnable != null) {
       editProvider!.isReturnable = widget.model!.isReturnable;
-      editProvider!.isreturnable =
-          widget.model!.isReturnable == "1" ? true : false;
+      editProvider!.isreturnable = widget.model!.isReturnable == "1"
+          ? true
+          : false;
     }
 
     if (widget.model!.isAttachmentRequired != null) {
@@ -438,8 +417,9 @@ class _EditProductState extends State<EditProduct>
     //is_cancelable
     if (widget.model!.isCancelable != null) {
       editProvider!.isCancelable = widget.model!.isCancelable;
-      editProvider!.iscancelable =
-          widget.model!.isCancelable == "1" ? true : false;
+      editProvider!.iscancelable = widget.model!.isCancelable == "1"
+          ? true
+          : false;
       if (editProvider!.iscancelable) {
         if (widget.model!.cancelableTill != "" &&
             widget.model!.cancelableTill != null) {
@@ -455,8 +435,9 @@ class _EditProductState extends State<EditProduct>
     //taxincludedinPrice
     if (widget.model!.taxincludedInPrice != null) {
       editProvider!.taxincludedinPrice = widget.model!.taxincludedInPrice;
-      editProvider!.taxincludedInPrice =
-          widget.model!.taxincludedInPrice == "1" ? true : false;
+      editProvider!.taxincludedInPrice = widget.model!.taxincludedInPrice == "1"
+          ? true
+          : false;
     }
     // indicator
     if (widget.model!.indicator != null) {
@@ -509,8 +490,8 @@ class _EditProductState extends State<EditProduct>
       editProvider!.productType = widget.model!.type;
     }
 
-//------------------------------------------------------------------------------
-//========================= Simple Product =====================================
+    //------------------------------------------------------------------------------
+    //========================= Simple Product =====================================
 
     if (editProvider!.productType == "simple_product") {
       // simple product price
@@ -523,21 +504,33 @@ class _EditProductState extends State<EditProduct>
         editProvider!.simpleProductTotalStock.text = widget.model!.stock!;
       }
       if (widget
-              .model!.prVarientList![widget.model!.selVarient!].orignalPrice !=
+              .model!
+              .prVarientList![widget.model!.selVarient!]
+              .orignalPrice !=
           null) {
         editProvider!.simpleProductPriceController.text = widget
-            .model!.prVarientList![widget.model!.selVarient!].orignalPrice!;
+            .model!
+            .prVarientList![widget.model!.selVarient!]
+            .orignalPrice!;
         editProvider!.simpleproductPrice = widget
-            .model!.prVarientList![widget.model!.selVarient!].orignalPrice!;
+            .model!
+            .prVarientList![widget.model!.selVarient!]
+            .orignalPrice!;
       }
       // simple product special price
-      if (widget.model!.prVarientList![widget.model!.selVarient!]
+      if (widget
+              .model!
+              .prVarientList![widget.model!.selVarient!]
               .orignalSpecialPrice !=
           null) {
-        editProvider!.simpleProductSpecialPriceController.text = widget.model!
-            .prVarientList![widget.model!.selVarient!].orignalSpecialPrice!;
-        editProvider!.simpleproductSpecialPrice = widget.model!
-            .prVarientList![widget.model!.selVarient!].orignalSpecialPrice!;
+        editProvider!.simpleProductSpecialPriceController.text = widget
+            .model!
+            .prVarientList![widget.model!.selVarient!]
+            .orignalSpecialPrice!;
+        editProvider!.simpleproductSpecialPrice = widget
+            .model!
+            .prVarientList![widget.model!.selVarient!]
+            .orignalSpecialPrice!;
       }
 
       if (widget.model!.prVarientList![widget.model!.selVarient!].height !=
@@ -577,10 +570,14 @@ class _EditProductState extends State<EditProduct>
         editProvider!.isStockSelected = true;
       }
       if (widget
-              .model!.prVarientList![widget.model!.selVarient!].availability !=
+              .model!
+              .prVarientList![widget.model!.selVarient!]
+              .availability !=
           '') {
         editProvider!.simpleproductStockStatus = widget
-            .model!.prVarientList![widget.model!.selVarient!].availability;
+            .model!
+            .prVarientList![widget.model!.selVarient!]
+            .availability;
       }
       // for save setting
       editProvider!.simpleProductSaveSettings = true;
@@ -589,12 +586,14 @@ class _EditProductState extends State<EditProduct>
       if (widget.model!.attributeList!.isNotEmpty) {
         var index = widget.model!.attributeList!.length;
         for (int i = 0; i < index; i++) {
-          var oldListOfAttributeValueID =
-              widget.model!.attributeList![i].id.toString().split(',');
+          var oldListOfAttributeValueID = widget.model!.attributeList![i].id
+              .toString()
+              .split(',');
 
           String? oldattributename = widget.model!.attributeList![i].name;
-          editProvider!.attrController
-              .add(TextEditingController(text: oldattributename));
+          editProvider!.attrController.add(
+            TextEditingController(text: oldattributename),
+          );
           editProvider!.variationBoolList.add(true);
           // for get the value of element
           final attributes = editProvider!.attributesList
@@ -650,8 +649,9 @@ class _EditProductState extends State<EditProduct>
         if (widget.model!.attributeList!.isEmpty.toString() == "false") {
           var index = widget.model!.attributeList!.length;
           for (int i = 0; i < index; i++) {
-            var oldListOfAttributeValueID =
-                widget.model!.attributeList![i].id.toString().split(',');
+            var oldListOfAttributeValueID = widget.model!.attributeList![i].id
+                .toString()
+                .split(',');
             //old variant id
 
             String? oldattributename = widget.model!.attributeList![i].name;
@@ -732,13 +732,15 @@ class _EditProductState extends State<EditProduct>
         if (widget.model!.attributeList!.isEmpty.toString() == "false") {
           var index = widget.model!.attributeList!.length;
           for (int i = 0; i < index; i++) {
-            var oldListOfAttributeValueID =
-                widget.model!.attributeList![i].id.toString().split(',');
+            var oldListOfAttributeValueID = widget.model!.attributeList![i].id
+                .toString()
+                .split(',');
             //old variant id
 
             String? oldattributename = widget.model!.attributeList![i].name;
-            editProvider!.attrController
-                .add(TextEditingController(text: oldattributename));
+            editProvider!.attrController.add(
+              TextEditingController(text: oldattributename),
+            );
             editProvider!.variationBoolList.add(true);
             // for get the value of element
             final attributes = editProvider!.attributesList
@@ -754,9 +756,7 @@ class _EditProductState extends State<EditProduct>
                   .where((e) => e.id == element)
                   .toList();
               if (tempvar.isNotEmpty) {
-                tempagain.add(
-                  tempvar[0],
-                );
+                tempagain.add(tempvar[0]);
               }
             }
             if (attributeID != null) {
@@ -802,8 +802,9 @@ class _EditProductState extends State<EditProduct>
         if (widget.model!.attributeList!.isEmpty.toString() == "false") {
           var index = widget.model!.attributeList!.length;
           for (int i = 0; i < index; i++) {
-            var oldListOfAttributeValueID =
-                widget.model!.attributeList![i].id.toString().split(',');
+            var oldListOfAttributeValueID = widget.model!.attributeList![i].id
+                .toString()
+                .split(',');
             //old variant id
             String? oldattributename = widget.model!.attributeList![i].name;
             editProvider!.attrController.add(
@@ -825,9 +826,7 @@ class _EditProductState extends State<EditProduct>
                   .where((e) => e.id == element)
                   .toList();
               if (tempvar.isNotEmpty) {
-                tempagain.add(
-                  tempvar[0],
-                );
+                tempagain.add(tempvar[0]);
               }
             }
             if (attributeID != null) {
@@ -864,8 +863,8 @@ class _EditProductState extends State<EditProduct>
       }
     }
 
-//----------------------------------------------------------------------------
-//========================= Variant Product ==================================
+    //----------------------------------------------------------------------------
+    //========================= Variant Product ==================================
 
     if (editProvider!.productType == "digital_product") {
       editProvider!.currentSellectedProductIsPysical = false;
@@ -914,12 +913,14 @@ class _EditProductState extends State<EditProduct>
       if (widget.model!.attributeList!.isEmpty.toString() == "false") {
         var index = widget.model!.attributeList!.length;
         for (int i = 0; i < index; i++) {
-          var oldListOfAttributeValueID =
-              widget.model!.attributeList![i].id.toString().split(',');
+          var oldListOfAttributeValueID = widget.model!.attributeList![i].id
+              .toString()
+              .split(',');
 
           String? oldattributename = widget.model!.attributeList![i].name;
-          editProvider!.attrController
-              .add(TextEditingController(text: oldattributename));
+          editProvider!.attrController.add(
+            TextEditingController(text: oldattributename),
+          );
           editProvider!.variationBoolList.add(true);
           // for get the value of element
           final attributes = editProvider!.attributesList
@@ -958,14 +959,12 @@ class _EditProductState extends State<EditProduct>
         }
       }
     }
-//------------------------------------------------------------------------------
-//========================= Loading Indiacator =================================
+    //------------------------------------------------------------------------------
+    //========================= Loading Indiacator =================================
 
-    setState(
-      () {
-        editProvider!.isLoading = false;
-      },
-    );
+    setState(() {
+      editProvider!.isLoading = false;
+    });
   }
 
   Future<void> getBrands() async {
@@ -973,30 +972,27 @@ class _EditProductState extends State<EditProduct>
     var parameter = {
       // SellerId: context.read<SettingProvider>().CUR_USERID,
     };
-    apiBaseHelper.postAPICall(getBrandsDataApi, parameter).then(
-      (getdata) async {
-        bool error = getdata["error"];
-        String? msg = getdata["message"];
+    apiBaseHelper
+        .postAPICall(getBrandsDataApi, parameter)
+        .then(
+          (getdata) async {
+            bool error = getdata["error"];
+            String? msg = getdata["message"];
 
-        if (!error) {
-          editProvider!.brandList.clear();
-          var data = getdata["data"];
-          editProvider!.brandList =
-              (data as List).map((data) => BrandModel.fromJson(data)).toList();
-        } else {
-          setSnackbar(
-            msg!,
-            context,
-          );
-        }
-      },
-      onError: (error) {
-        setSnackbar(
-          error.toString(),
-          context,
+            if (!error) {
+              editProvider!.brandList.clear();
+              var data = getdata["data"];
+              editProvider!.brandList = (data as List)
+                  .map((data) => BrandModel.fromJson(data))
+                  .toList();
+            } else {
+              setSnackbar(msg!, context);
+            }
+          },
+          onError: (error) {
+            setSnackbar(error.toString(), context);
+          },
         );
-      },
-    );
   }
 
   attributeDialog(int pos) async {
@@ -1020,7 +1016,8 @@ class _EditProductState extends State<EditProduct>
                 scrollDirection: Axis.vertical,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -1032,10 +1029,9 @@ class _EditProductState extends State<EditProduct>
                           children: [
                             Text(
                               "Select Attribute".translate(context: context),
-                              style: Theme.of(this.context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(color: primary),
+                              style: Theme.of(
+                                this.context,
+                              ).textTheme.titleMedium!.copyWith(color: primary),
                             ),
                           ],
                         ),
@@ -1060,91 +1056,112 @@ class _EditProductState extends State<EditProduct>
                                     AttributeSetModel item =
                                         editProvider!.attributeSetList[index];
 
-                                    for (int i = 0;
-                                        i < editProvider!.attributesList.length;
-                                        i++) {
+                                    for (
+                                      int i = 0;
+                                      i < editProvider!.attributesList.length;
+                                      i++
+                                    ) {
                                       if (item.id ==
-                                          editProvider!.attributesList[i]
+                                          editProvider!
+                                              .attributesList[i]
                                               .attributeSetId) {
                                         attrList.add(
-                                            editProvider!.attributesList[i]);
+                                          editProvider!.attributesList[i],
+                                        );
                                       }
                                     }
                                     return Material(
                                       child: StickyHeaderBuilder(
-                                        builder: (BuildContext context,
-                                            double stuckAmount) {
-                                          return Container(
-                                            decoration: BoxDecoration(
-                                                color: primary,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        circularBorderRadius7)),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 2),
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              editProvider!
-                                                      .attributeSetList[index]
-                                                      .name ??
-                                                  '',
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          );
-                                        },
+                                        builder:
+                                            (
+                                              BuildContext context,
+                                              double stuckAmount,
+                                            ) {
+                                              return Container(
+                                                decoration: BoxDecoration(
+                                                  color: primary,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        circularBorderRadius7,
+                                                      ),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 8.0,
+                                                      vertical: 2,
+                                                    ),
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  editProvider!
+                                                          .attributeSetList[index]
+                                                          .name ??
+                                                      '',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                         content: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
-                                          children: List<int>.generate(
-                                              attrList.length, (i) => i).map(
-                                            (item) {
-                                              return InkWell(
-                                                onTap: () {
-                                                  setState(
-                                                    () {
+                                          children:
+                                              List<int>.generate(
+                                                attrList.length,
+                                                (i) => i,
+                                              ).map((item) {
+                                                return InkWell(
+                                                  onTap: () {
+                                                    setState(() {
                                                       editProvider!
                                                           .attrController[pos]
-                                                          .text = attrList[
-                                                              item]
+                                                          .text = attrList[item]
                                                           .name!;
                                                       editProvider!
                                                               .attributeIndiacator =
                                                           pos + 1;
                                                       if (!editProvider!.attrId
-                                                          .contains(int.parse(
+                                                          .contains(
+                                                            int.parse(
                                                               attrList[item]
-                                                                  .id!))) {
+                                                                  .id!,
+                                                            ),
+                                                          )) {
                                                         editProvider!.attrId
-                                                            .add(int.parse(
+                                                            .add(
+                                                              int.parse(
                                                                 attrList[item]
-                                                                    .id!));
+                                                                    .id!,
+                                                              ),
+                                                            );
                                                         Navigator.pop(context);
                                                       } else {
                                                         setSnackbar(
                                                           "Already inserted.."
                                                               .translate(
-                                                                  context:
-                                                                      context),
+                                                                context:
+                                                                    context,
+                                                              ),
                                                           context,
                                                         );
                                                       }
-                                                    },
-                                                  );
-                                                },
-                                                child: Container(
-                                                  width: double.maxFinite,
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    attrList[item].name ?? '',
-                                                    textAlign: TextAlign.start,
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    width: double.maxFinite,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                          8.0,
+                                                        ),
+                                                    child: Text(
+                                                      attrList[item].name ?? '',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          ).toList(),
+                                                );
+                                              }).toList(),
                                         ),
                                       ),
                                     );
@@ -1163,10 +1180,10 @@ class _EditProductState extends State<EditProduct>
     );
   }
 
-//------------------------------------------------------------------------------
-//========================= Other Image ========================================
+  //------------------------------------------------------------------------------
+  //========================= Other Image ========================================
 
-// logic painding
+  // logic painding
 
   otherImages(String from, int pos) {
     return Padding(
@@ -1176,47 +1193,42 @@ class _EditProductState extends State<EditProduct>
         children: [
           InkWell(
             child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: black.withValues(alpha: 0.3),
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                border: Border.all(color: black.withValues(alpha: 0.3)),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    DesignConfiguration.setNewSvgPath(Assets.capa),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.symmetric(
+                      horizontal: 20,
                     ),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                        DesignConfiguration.setNewSvgPath(Assets.capa)),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                      child: Text(
-                        'ENTER_YOUR_UPLOAD_HERE'.translate(context: context),
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: lightBlack, fontSize: 11),
+                    child: Text(
+                      'ENTER_YOUR_UPLOAD_HERE'.translate(context: context),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: lightBlack,
+                        fontSize: 11,
                       ),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
             onTap: () {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => Media(
-                    from: from,
-                    pos: pos,
-                    type: "edit",
-                  ),
+                  builder: (context) =>
+                      Media(from: from, pos: pos, type: "edit"),
                 ),
-              ).then(
-                (value) => setState(
-                  () {},
-                ),
-              );
+              ).then((value) => setState(() {}));
             },
           ),
         ],
@@ -1248,13 +1260,11 @@ class _EditProductState extends State<EditProduct>
                       alignment: AlignmentDirectional.topEnd,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 8.0,
-                            right: 8.0,
-                          ),
+                          padding: const EdgeInsets.only(top: 8.0, right: 8.0),
                           child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(circularBorderRadius10),
+                            borderRadius: BorderRadius.circular(
+                              circularBorderRadius10,
+                            ),
                             child: Image.network(
                               editProvider!.variationList[pos].images![i - 1],
                               width: 100,
@@ -1266,17 +1276,16 @@ class _EditProductState extends State<EditProduct>
                         InkWell(
                           onTap: () {
                             if (mounted) {
-                              setState(
-                                () {
-                                  editProvider!.variationList[pos].images!
+                              setState(() {
+                                editProvider!.variationList[pos].images!
+                                    .removeAt(i);
+                                try {
+                                  editProvider!
+                                      .variationList[pos]
+                                      .imageRelativePath!
                                       .removeAt(i);
-                                  try {
-                                    editProvider!
-                                        .variationList[pos].imageRelativePath!
-                                        .removeAt(i);
-                                  } catch (_) {}
-                                },
-                              );
+                                } catch (_) {}
+                              });
                             }
                           },
                           child: Container(
@@ -1302,36 +1311,38 @@ class _EditProductState extends State<EditProduct>
           );
   }
 
-//------------------------------------------------------------------------------
-//========================= Additional Info ====================================
+  //------------------------------------------------------------------------------
+  //========================= Additional Info ====================================
 
   additionalInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        currentSelectedPossitionBord(context, setStateNow),
+        // currentSelectedPossitionBord(context, setStateNow),
         editProvider!.curSelPos == 0
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  getCommanSizedBox(),
-                  getPrimaryCommanText(
-                      "Type Of Product".translate(context: context), false),
-                  getCommanSizedBox(),
+                  // getCommanSizedBox(),
+                  // getPrimaryCommanText(
+                  //   "Type Of Product".translate(context: context),
+                  //   false,
+                  // ),
+                  // getCommanSizedBox(),
 
-                  getIconSelectionDesing(
-                    "Select Type".translate(context: context),
-                    9,
-                    context,
-                    setStateNow,
-                  ),
-                  editProvider!.productType == 'simple_product'
-                      ? getCommanSizedBox()
-                      : Container(),
-                  editProvider!.productType == 'simple_product'
-                      ? getCommanSizedBox()
-                      : Container(),
+                  // getIconSelectionDesing(
+                  //   "Select Type".translate(context: context),
+                  //   9,
+                  //   context,
+                  //   setStateNow,
+                  // ),
+                  // editProvider!.productType == 'simple_product'
+                  //     ? getCommanSizedBox()
+                  //     : Container(),
+                  // editProvider!.productType == 'simple_product'
+                  //     ? getCommanSizedBox()
+                  //     : Container(),
                   editProvider!.productType == 'simple_product'
                       ? Row(
                           children: [
@@ -1340,11 +1351,10 @@ class _EditProductState extends State<EditProduct>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   getPrimaryCommanText(
-                                      "PRICE_LBL".translate(context: context),
-                                      true),
-                                  const SizedBox(
-                                    height: 5,
+                                    "PRICE_LBL".translate(context: context),
+                                    true,
                                   ),
+                                  const SizedBox(height: 5),
                                   getCommanInputTextField(
                                     " ",
                                     10,
@@ -1362,23 +1372,22 @@ class _EditProductState extends State<EditProduct>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   getPrimaryCommanText(
-                                      "Special Price"
-                                          .translate(context: context),
-                                      true),
-                                  const SizedBox(
-                                    height: 5,
+                                    "Special Price".translate(context: context),
+                                    true,
                                   ),
+                                  const SizedBox(height: 5),
                                   getCommanInputTextField(
                                     //logic painding
                                     " ",
                                     11,
                                     0.06,
                                     0.44,
-                                    3, context,
+                                    3,
+                                    context,
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         )
                       : Container(),
@@ -1391,8 +1400,9 @@ class _EditProductState extends State<EditProduct>
                             Expanded(
                               flex: 2,
                               child: getPrimaryCommanText(
-                                  "Weight (kg)".translate(context: context),
-                                  true),
+                                "Weight (kg)".translate(context: context),
+                                true,
+                              ),
                             ),
                             Expanded(
                               flex: 3,
@@ -1417,8 +1427,9 @@ class _EditProductState extends State<EditProduct>
                             Expanded(
                               flex: 2,
                               child: getPrimaryCommanText(
-                                  "Height (cms)".translate(context: context),
-                                  true),
+                                "Height (cms)".translate(context: context),
+                                true,
+                              ),
                             ),
                             Expanded(
                               flex: 3,
@@ -1443,8 +1454,9 @@ class _EditProductState extends State<EditProduct>
                             Expanded(
                               flex: 2,
                               child: getPrimaryCommanText(
-                                  "Breadth (cms)".translate(context: context),
-                                  true),
+                                "Breadth (cms)".translate(context: context),
+                                true,
+                              ),
                             ),
                             Expanded(
                               flex: 3,
@@ -1469,8 +1481,9 @@ class _EditProductState extends State<EditProduct>
                             Expanded(
                               flex: 2,
                               child: getPrimaryCommanText(
-                                  "Length (cms)".translate(context: context),
-                                  true),
+                                "Length (cms)".translate(context: context),
+                                true,
+                              ),
                             ),
                             Expanded(
                               flex: 3,
@@ -1489,32 +1502,32 @@ class _EditProductState extends State<EditProduct>
                   editProvider!.productType == 'simple_product'
                       ? getCommanSizedBox()
                       : Container(),
-                  editProvider!.productType != 'digital_product'
-                      ? Row(
-                          children: [
-                            Expanded(
-                              flex: 5,
-                              child: getPrimaryCommanText(
-                                  "Enable Stock Management"
-                                      .translate(context: context),
-                                  true),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: CheckboxListTile(
-                                value: editProvider!.isStockSelected ?? false,
-                                onChanged: (bool? value) {
-                                  setState(
-                                    () {
-                                      editProvider!.isStockSelected = value!;
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        )
-                      : Container(),
+                  // editProvider!.productType != 'digital_product'
+                  //     ? Row(
+                  //         children: [
+                  //           Expanded(
+                  //             flex: 5,
+                  //             child: getPrimaryCommanText(
+                  //               "Enable Stock Management".translate(
+                  //                 context: context,
+                  //               ),
+                  //               true,
+                  //             ),
+                  //           ),
+                  //           Expanded(
+                  //             flex: 2,
+                  //             child: CheckboxListTile(
+                  //               value: editProvider!.isStockSelected ?? false,
+                  //               onChanged: (bool? value) {
+                  //                 setState(() {
+                  //                   editProvider!.isStockSelected = value!;
+                  //                 });
+                  //               },
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       )
+                  //     : Container(),
                   editProvider!.isStockSelected != null &&
                           editProvider!.isStockSelected == true &&
                           editProvider!.productType == 'simple_product'
@@ -1531,18 +1544,18 @@ class _EditProductState extends State<EditProduct>
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       getPrimaryCommanText(
-                                          "SKU".translate(context: context),
-                                          true),
-                                      const SizedBox(
-                                        height: 5,
+                                        "SKU".translate(context: context),
+                                        true,
                                       ),
+                                      const SizedBox(height: 5),
                                       getCommanInputTextField(
                                         //logic painding
                                         " ",
                                         12,
                                         0.06,
                                         0.44,
-                                        2, context,
+                                        2,
+                                        context,
                                       ),
                                     ],
                                   ),
@@ -1555,12 +1568,12 @@ class _EditProductState extends State<EditProduct>
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       getPrimaryCommanText(
-                                          "Total Stock"
-                                              .translate(context: context),
-                                          true),
-                                      const SizedBox(
-                                        height: 5,
+                                        "Total Stock".translate(
+                                          context: context,
+                                        ),
+                                        true,
                                       ),
+                                      const SizedBox(height: 5),
                                       getCommanInputTextField(
                                         " ",
                                         13,
@@ -1595,16 +1608,19 @@ class _EditProductState extends State<EditProduct>
                           "Save Settings".translate(context: context),
                           4,
                           setStateNow,
-                          context)
+                          context,
+                        )
                       : Container(),
 
                   editProvider!.isStockSelected != null &&
                           editProvider!.isStockSelected == true &&
                           editProvider!.productType == 'variable_product'
                       ? getPrimaryCommanText(
-                          "Choose Stock Management Type"
-                              .translate(context: context),
-                          false)
+                          "Choose Stock Management Type".translate(
+                            context: context,
+                          ),
+                          false,
+                        )
                       : Container(),
                   editProvider!.productType == 'variable_product'
                       ? getCommanSizedBox()
@@ -1637,11 +1653,10 @@ class _EditProductState extends State<EditProduct>
                                         CrossAxisAlignment.start,
                                     children: [
                                       getPrimaryCommanText(
-                                          "SKU".translate(context: context),
-                                          true),
-                                      const SizedBox(
-                                        height: 5,
+                                        "SKU".translate(context: context),
+                                        true,
                                       ),
+                                      const SizedBox(height: 5),
                                       getCommanInputTextField(
                                         " ",
                                         14,
@@ -1660,12 +1675,12 @@ class _EditProductState extends State<EditProduct>
                                         CrossAxisAlignment.start,
                                     children: [
                                       getPrimaryCommanText(
-                                          "Total Stock"
-                                              .translate(context: context),
-                                          true),
-                                      const SizedBox(
-                                        height: 5,
+                                        "Total Stock".translate(
+                                          context: context,
+                                        ),
+                                        true,
                                       ),
+                                      const SizedBox(height: 5),
                                       getCommanInputTextField(
                                         " ",
                                         15,
@@ -1681,8 +1696,9 @@ class _EditProductState extends State<EditProduct>
                             ),
                             getCommanSizedBox(),
                             getPrimaryCommanText(
-                                "STOCK_STATUS".translate(context: context),
-                                false),
+                              "STOCK_STATUS".translate(context: context),
+                              false,
+                            ),
                             getCommanSizedBox(),
                             getIconSelectionDesing(
                               "Select Stock Status".translate(context: context),
@@ -1702,7 +1718,8 @@ class _EditProductState extends State<EditProduct>
                           "Save Settings".translate(context: context),
                           5,
                           setStateNow,
-                          context)
+                          context,
+                        )
                       : Container(),
 
                   editProvider!.productType == 'variable_product' &&
@@ -1712,11 +1729,11 @@ class _EditProductState extends State<EditProduct>
                           "Save Settings".translate(context: context),
                           6,
                           setStateNow,
-                          context)
+                          context,
+                        )
                       : Container(),
 
                   //Digital Product
-
                   editProvider!.productType == 'digital_product'
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1726,8 +1743,9 @@ class _EditProductState extends State<EditProduct>
                                 Expanded(
                                   flex: 2,
                                   child: getPrimaryCommanText(
-                                      "PRICE_LBL".translate(context: context),
-                                      true),
+                                    "PRICE_LBL".translate(context: context),
+                                    true,
+                                  ),
                                 ),
                                 Expanded(
                                   flex: 3,
@@ -1748,9 +1766,9 @@ class _EditProductState extends State<EditProduct>
                                 Expanded(
                                   flex: 2,
                                   child: getPrimaryCommanText(
-                                      "Special Price"
-                                          .translate(context: context),
-                                      true),
+                                    "Special Price".translate(context: context),
+                                    true,
+                                  ),
                                 ),
                                 Expanded(
                                   flex: 3,
@@ -1771,7 +1789,9 @@ class _EditProductState extends State<EditProduct>
                                 Expanded(
                                   flex: 2,
                                   child: getPrimaryCommanText(
-                                      "Is Download allowed?", true),
+                                    "Is Download allowed?",
+                                    true,
+                                  ),
                                 ),
                                 getCommanSwitch(5, setState),
                               ],
@@ -1783,7 +1803,9 @@ class _EditProductState extends State<EditProduct>
                                         CrossAxisAlignment.start,
                                     children: [
                                       getPrimaryCommanText(
-                                          'Download Link Type', false),
+                                        'Download Link Type',
+                                        false,
+                                      ),
                                       getCommanSizedBox(),
                                       getIconSelectionDesing(
                                         "self_hosted",
@@ -1810,14 +1832,16 @@ class _EditProductState extends State<EditProduct>
                                                   color: primary,
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          circularBorderRadius7),
+                                                        circularBorderRadius7,
+                                                      ),
                                                 ),
                                                 width: 90,
                                                 height: 40,
                                                 child: Center(
                                                   child: Text(
                                                     "Upload".translate(
-                                                        context: context),
+                                                      context: context,
+                                                    ),
                                                     style: const TextStyle(
                                                       color: white,
                                                     ),
@@ -1830,13 +1854,15 @@ class _EditProductState extends State<EditProduct>
                                                   CupertinoPageRoute(
                                                     builder: (context) =>
                                                         const Media(
-                                                      from: "archive,document",
-                                                      pos: 0,
-                                                      type: "edit",
-                                                    ),
+                                                          from:
+                                                              "archive,document",
+                                                          pos: 0,
+                                                          type: "edit",
+                                                        ),
                                                   ),
                                                 ).then(
-                                                    (value) => setState(() {}));
+                                                  (value) => setState(() {}),
+                                                );
                                               },
                                             )
                                           : Container(),
@@ -1846,15 +1872,15 @@ class _EditProductState extends State<EditProduct>
                                                       .digitalProductNamePathNameForSelectedFile !=
                                                   ''
                                           ? Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(
+                                                8.0,
+                                              ),
                                               child: Row(
                                                 children: [
                                                   const Icon(
-                                                      Icons.file_open_rounded),
-                                                  const SizedBox(
-                                                    width: 5,
+                                                    Icons.file_open_rounded,
                                                   ),
+                                                  const SizedBox(width: 5),
                                                   Expanded(
                                                     child: Text(
                                                       editProvider!
@@ -1880,7 +1906,9 @@ class _EditProductState extends State<EditProduct>
                                                   .selectedDigitalProductTypeOfDownloadLink ==
                                               'Add Link'
                                           ? getPrimaryCommanText(
-                                              'Digital Product Link', false)
+                                              'Digital Product Link',
+                                              false,
+                                            )
                                           : Container(),
                                       editProvider!
                                                   .selectedDigitalProductTypeOfDownloadLink ==
@@ -1906,26 +1934,36 @@ class _EditProductState extends State<EditProduct>
                             InkWell(
                               onTap: () {
                                 if (editProvider!
-                                    .digitalPriceController.text.isEmpty) {
+                                    .digitalPriceController
+                                    .text
+                                    .isEmpty) {
                                   setSnackbar(
-                                    "Please enter product price"
-                                        .translate(context: context),
+                                    "Please enter product price".translate(
+                                      context: context,
+                                    ),
                                     context,
                                   );
                                 } else if (editProvider!
-                                    .digitalSpecialController.text.isEmpty) {
+                                    .digitalSpecialController
+                                    .text
+                                    .isEmpty) {
                                   editProvider!.digitalProductSaveSettings =
                                       true;
                                   setSnackbar(
-                                    "Setting saved successfully"
-                                        .translate(context: context),
+                                    "Setting saved successfully".translate(
+                                      context: context,
+                                    ),
                                     context,
                                   );
                                   setState(() {});
-                                } else if (int.parse(editProvider!
-                                        .digitalPriceController.text) <
-                                    int.parse(editProvider!
-                                        .digitalSpecialController.text)) {
+                                } else if (int.parse(
+                                      editProvider!.digitalPriceController.text,
+                                    ) <
+                                    int.parse(
+                                      editProvider!
+                                          .digitalSpecialController
+                                          .text,
+                                    )) {
                                   setSnackbar(
                                     "Special price must be less than original price"
                                         .translate(context: context),
@@ -1935,8 +1973,9 @@ class _EditProductState extends State<EditProduct>
                                   editProvider!.digitalProductSaveSettings =
                                       true;
                                   setSnackbar(
-                                    "Setting saved successfully"
-                                        .translate(context: context),
+                                    "Setting saved successfully".translate(
+                                      context: context,
+                                    ),
                                     context,
                                   );
                                   setState(() {});
@@ -1945,7 +1984,8 @@ class _EditProductState extends State<EditProduct>
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
-                                      circularBorderRadius7),
+                                    circularBorderRadius7,
+                                  ),
                                   color: primary,
                                 ),
                                 height: 35,
@@ -1968,156 +2008,160 @@ class _EditProductState extends State<EditProduct>
               )
             : Container(),
 
-// current selected possition == 1
-
-        editProvider!.curSelPos == 1 &&
-                (editProvider!.simpleProductSaveSettings ||
-                    editProvider!.variantProductVariableLevelSaveSettings ||
-                    editProvider!.variantProductProductLevelSaveSettings ||
-                    editProvider!.digitalProductSaveSettings)
-            ? Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  getCommanSizedBox(),
-                  getCommanSizedBox(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Attributes".translate(context: context), false),
-                      getCommanSizedBox(),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  backgroundColor: white,
-                                  side: const BorderSide(color: black),
-                                  minimumSize:
-                                      Size(width * 0.43, height * 0.06)),
-                              onPressed: () {
-                                if (editProvider!.attributeIndiacator ==
-                                    editProvider!.attrController.length) {
-                                  setState(
-                                    () {
-                                      editProvider!.attrController
-                                          .add(TextEditingController());
-                                      editProvider!.variationBoolList
-                                          .add(false);
-                                    },
-                                  );
-                                } else {
-                                  setSnackbar(
-                                    "fill the box then add another"
-                                        .translate(context: context),
-                                    context,
-                                  );
-                                }
-                              },
-                              child: Text(
-                                  "Add Attribute".translate(context: context),
-                                  style: const TextStyle(
-                                      color: black,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                          ),
-                          getCommanSizedBoxWidth(),
-                          Expanded(
-                            child: OutlinedButton(
-                              style: TextButton.styleFrom(
-                                  backgroundColor: black,
-                                  minimumSize:
-                                      Size(width * 0.43, height * 0.06)),
-                              onPressed: () {
-                                editProvider!.tempAttList.clear();
-                                List<String> attributeIds = [];
-                                for (var i = 0;
-                                    i < editProvider!.variationBoolList.length;
-                                    i++) {
-                                  if (editProvider!.variationBoolList[i]) {
-                                    final attributes = editProvider!
-                                        .attributesList
-                                        .where((element) =>
-                                            element.name ==
-                                            editProvider!
-                                                .attrController[i].text)
-                                        .toList();
-                                    if (attributes.isNotEmpty) {
-                                      attributeIds.add(attributes.first.id!);
-                                    }
-                                  }
-                                }
-                                setState(
-                                  () {
-                                    editProvider!.resultAttr = [];
-                                    editProvider!.resultID = [];
-                                    editProvider!.variationList = [];
-                                    editProvider!.finalAttList = [];
-                                    for (var key in attributeIds) {
-                                      editProvider!.tempAttList.add(
-                                          editProvider!
-                                              .selectedAttributeValues[key]!);
-                                    }
-                                    for (int i = 0;
-                                        i < editProvider!.tempAttList.length;
-                                        i++) {
-                                      editProvider!.finalAttList
-                                          .add(editProvider!.tempAttList[i]);
-                                    }
-                                    if (editProvider!.finalAttList.isNotEmpty) {
-                                      editProvider!.max =
-                                          editProvider!.finalAttList.length - 1;
-
-                                      getCombination([], [], 0);
-                                      editProvider!.row = 1;
-                                      editProvider!.col =
-                                          editProvider!.max! + 1;
-                                      for (int i = 0;
-                                          i < editProvider!.col!;
-                                          i++) {
-                                        int singleRow = editProvider!
-                                            .finalAttList[i].length;
-                                        editProvider!.row =
-                                            editProvider!.row * singleRow;
-                                      }
-                                    }
-                                    setSnackbar(
-                                      "Attributes saved successfully"
-                                          .translate(context: context),
-                                      context,
-                                    );
-                                  },
-                                );
-                              },
-                              child: Text(
-                                "Save Attribute".translate(context: context),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, color: white),
+        // current selected possition == 1
+        // editProvider!.curSelPos == 1 &&
+        //         (editProvider!.simpleProductSaveSettings ||
+        //             editProvider!.variantProductVariableLevelSaveSettings ||
+        //             editProvider!.variantProductProductLevelSaveSettings ||
+        //             editProvider!.digitalProductSaveSettings)
+        //     ?
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            getCommanSizedBox(),
+            getCommanSizedBox(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                getCommanSizedBox(),
+                getPrimaryCommanText(
+                  "Attributes".translate(context: context),
+                  false,
+                ),
+                getCommanSizedBox(),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: white,
+                          side: const BorderSide(color: black),
+                          minimumSize: Size(width * 0.43, height * 0.06),
+                        ),
+                        onPressed: () {
+                          if (editProvider!.attributeIndiacator ==
+                              editProvider!.attrController.length) {
+                            setState(() {
+                              editProvider!.attrController.add(
+                                TextEditingController(),
+                              );
+                              editProvider!.variationBoolList.add(false);
+                            });
+                          } else {
+                            setSnackbar(
+                              "fill the box then add another".translate(
+                                context: context,
                               ),
-                            ),
+                              context,
+                            );
+                          }
+                        },
+                        child: Text(
+                          "Add Attribute".translate(context: context),
+                          style: const TextStyle(
+                            color: black,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
+                        ),
                       ),
-                    ],
-                  ),
-                  getCommanSizedBox(),
-                  editProvider!.productType == 'variable_product'
-                      ? Text(
-                          "Note : select checkbox if the attribute is to be used for variation"
-                              .translate(
-                            context: context,
+                    ),
+                    getCommanSizedBoxWidth(),
+                    Expanded(
+                      child: OutlinedButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: black,
+                          minimumSize: Size(width * 0.43, height * 0.06),
+                        ),
+                        onPressed: () {
+                          editProvider!.tempAttList.clear();
+                          List<String> attributeIds = [];
+                          for (
+                            var i = 0;
+                            i < editProvider!.variationBoolList.length;
+                            i++
+                          ) {
+                            if (editProvider!.variationBoolList[i]) {
+                              final attributes = editProvider!.attributesList
+                                  .where(
+                                    (element) =>
+                                        element.name ==
+                                        editProvider!.attrController[i].text,
+                                  )
+                                  .toList();
+                              if (attributes.isNotEmpty) {
+                                attributeIds.add(attributes.first.id!);
+                              }
+                            }
+                          }
+                          setState(() {
+                            editProvider!.resultAttr = [];
+                            editProvider!.resultID = [];
+                            editProvider!.variationList = [];
+                            editProvider!.finalAttList = [];
+                            for (var key in attributeIds) {
+                              editProvider!.tempAttList.add(
+                                editProvider!.selectedAttributeValues[key]!,
+                              );
+                            }
+                            for (
+                              int i = 0;
+                              i < editProvider!.tempAttList.length;
+                              i++
+                            ) {
+                              editProvider!.finalAttList.add(
+                                editProvider!.tempAttList[i],
+                              );
+                            }
+                            if (editProvider!.finalAttList.isNotEmpty) {
+                              editProvider!.max =
+                                  editProvider!.finalAttList.length - 1;
+
+                              getCombination([], [], 0);
+                              editProvider!.row = 1;
+                              editProvider!.col = editProvider!.max! + 1;
+                              for (int i = 0; i < editProvider!.col!; i++) {
+                                int singleRow =
+                                    editProvider!.finalAttList[i].length;
+                                editProvider!.row =
+                                    editProvider!.row * singleRow;
+                              }
+                            }
+                            setSnackbar(
+                              "Attributes saved successfully".translate(
+                                context: context,
+                              ),
+                              context,
+                            );
+                          });
+                        },
+                        child: Text(
+                          "Save Attribute".translate(context: context),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: white,
                           ),
-                        )
-                      : Container(),
-                  getCommanSizedBox(),
-                  for (int i = 0; i < editProvider!.attrController.length; i++)
-                    addAttribute(i)
-                ],
-              )
-            : Container(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            getCommanSizedBox(),
+            editProvider!.productType == 'variable_product'
+                ? Text(
+                    "Note : select checkbox if the attribute is to be used for variation"
+                        .translate(context: context),
+                  )
+                : Container(),
+            getCommanSizedBox(),
+            for (int i = 0; i < editProvider!.attrController.length; i++)
+              addAttribute(i),
+          ],
+        ),
+        // : Container(),
         editProvider!.curSelPos == 2 && editProvider!.variationList.isNotEmpty
             ? ListView.builder(
                 itemCount: editProvider!.row,
@@ -2125,18 +2169,17 @@ class _EditProductState extends State<EditProduct>
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, i) {
                   print(
-                      "variation attribute----->${editProvider!.variationList.first.varient_value}");
+                    "variation attribute----->${editProvider!.variationList.first.varient_value}",
+                  );
                   return Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Container(
                       decoration: BoxDecoration(
                         color: grey1,
-                        borderRadius:
-                            BorderRadius.circular(circularBorderRadius5),
-                        border: Border.all(
-                          color: grey2,
-                          width: 1,
+                        borderRadius: BorderRadius.circular(
+                          circularBorderRadius5,
                         ),
+                        border: Border.all(color: grey2, width: 1),
                       ),
                       child: ExpansionTile(
                         textColor: Colors.green,
@@ -2146,10 +2189,12 @@ class _EditProductState extends State<EditProduct>
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                    horizontal: 8.0,
+                                  ),
                                   child: Text(
                                     editProvider!
-                                        .variationList[i].varient_value!
+                                        .variationList[i]
+                                        .varient_value!
                                         .split(',')[j],
                                     style: const TextStyle(
                                       color: black,
@@ -2169,9 +2214,7 @@ class _EditProductState extends State<EditProduct>
                               onTap: () {
                                 editProvider!.variationList.removeAt(i);
                                 editProvider!.row = editProvider!.row - 1;
-                                setState(
-                                  () {},
-                                );
+                                setState(() {});
                               },
                             ),
                           ],
@@ -2190,7 +2233,10 @@ class _EditProductState extends State<EditProduct>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.stretch,
                                       children: _buildExpandableContent(
-                                          i, context, setState),
+                                        i,
+                                        context,
+                                        setState,
+                                      ),
                                     ),
                                   ),
                                   getCommanSizedBoxWidth(),
@@ -2199,7 +2245,10 @@ class _EditProductState extends State<EditProduct>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.stretch,
                                       children: _buildExpandableContent2(
-                                          i, context, setState),
+                                        i,
+                                        context,
+                                        setState,
+                                      ),
                                     ),
                                   ),
                                   getCommanSizedBoxWidth(),
@@ -2214,7 +2263,7 @@ class _EditProductState extends State<EditProduct>
                   );
                 },
               )
-            : Container()
+            : Container(),
       ],
     );
   }
@@ -2234,8 +2283,10 @@ class _EditProductState extends State<EditProduct>
         editProvider!.resultAttr.addAll(a);
         editProvider!.resultID.addAll(aId);
 
-        Product_Varient model =
-            Product_Varient(attr_name: a.join(","), id: aId.join(","));
+        Product_Varient model = Product_Varient(
+          attr_name: a.join(","),
+          id: aId.join(","),
+        );
 
         editProvider!.variationList.add(model);
       } else {
@@ -2247,29 +2298,17 @@ class _EditProductState extends State<EditProduct>
   _buildExpandableContent(int pos, BuildContext context, Function setState) {
     List<Widget> columnContent = [];
 
-    columnContent.add(
-      variantProductPrice(pos),
-    );
-    columnContent.add(
-      variantProductSpecialPrice(pos),
-    );
-    columnContent.add(
-      variantProductWeight(pos),
-    );
+    columnContent.add(variantProductPrice(pos));
+    columnContent.add(variantProductSpecialPrice(pos));
+    columnContent.add(variantProductWeight(pos));
     return columnContent;
   }
 
   _buildExpandableContent2(int pos, BuildContext context, Function setState) {
     List<Widget> columnContent2 = [];
-    columnContent2.add(
-      variantProductHeight(pos),
-    );
-    columnContent2.add(
-      variantProductBreadth(pos),
-    );
-    columnContent2.add(
-      variantProductLength(pos),
-    );
+    columnContent2.add(variantProductHeight(pos));
+    columnContent2.add(variantProductBreadth(pos));
+    columnContent2.add(variantProductLength(pos));
 
     return columnContent2;
   }
@@ -2297,24 +2336,31 @@ class _EditProductState extends State<EditProduct>
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: getPrimaryCommanText(
-                      "Stock Status :".translate(context: context), true),
+                    "Stock Status :".translate(context: context),
+                    true,
+                  ),
                 ),
                 variantStockStatusSelect(pos),
-                getCommanSizedBox()
+                getCommanSizedBox(),
               ],
             )
           : Container(),
     );
-    columnContent.add(Padding(
+    columnContent.add(
+      Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: getPrimaryCommanText(
-            "Other Images".translate(context: context), true)));
+          "Other Images".translate(context: context),
+          true,
+        ),
+      ),
+    );
 
     columnContent.add(variantOtherImageShow(pos));
     return columnContent;
   }
 
-// ========== variant Product Price add In side the variant price add ==========
+  // ========== variant Product Price add In side the variant price add ==========
 
   Widget variantProductPrice(int pos) {
     return VariantInputField(
@@ -2383,8 +2429,11 @@ class _EditProductState extends State<EditProduct>
     );
   }
 
-  addValAttribute(List<AttributeValueModel> selected,
-      List<AttributeValueModel> searchRange, String attributeId) {
+  addValAttribute(
+    List<AttributeValueModel> selected,
+    List<AttributeValueModel> searchRange,
+    String attributeId,
+  ) {
     showModalBottomSheet<List<AttributeValueModel>>(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -2402,47 +2451,40 @@ class _EditProductState extends State<EditProduct>
           child: CustomScrollView(
             slivers: <Widget>[
               SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "Select Attribute Value"
-                                .translate(context: context),
-                            style: const TextStyle(
-                              fontSize: textFontSize18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.left,
+                delegate: SliverChildListDelegate([
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Select Attribute Value".translate(context: context),
+                          style: const TextStyle(
+                            fontSize: textFontSize18,
+                            fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.left,
                         ),
-                      ],
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: Colors.grey),
+                ]),
               ),
               SliverGrid(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 2,
-                    mainAxisSpacing: 5.0,
-                    crossAxisSpacing: 5.0),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return filterChipWidget(
-                      chipName: searchRange[index],
-                      selectedList: selected,
-                      update: update,
-                      fromAdd: false,
-                    );
-                  },
-                  childCount: searchRange.length,
+                  crossAxisCount: 3,
+                  childAspectRatio: 2,
+                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 5.0,
                 ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return filterChipWidget(
+                    chipName: searchRange[index],
+                    selectedList: selected,
+                    update: update,
+                    fromAdd: false,
+                  );
+                }, childCount: searchRange.length),
               ),
             ],
           ),
@@ -2452,15 +2494,14 @@ class _EditProductState extends State<EditProduct>
   }
 
   update() {
-    setState(
-      () {},
-    );
+    setState(() {});
   }
 
   addAttribute(int pos) {
     final result = editProvider!.attributesList
         .where(
-            (element) => element.name == editProvider!.attrController[pos].text)
+          (element) => element.name == editProvider!.attrController[pos].text,
+        )
         .toList();
     final attributeId = result.isEmpty ? "" : result.first.id;
     return Card(
@@ -2478,18 +2519,17 @@ class _EditProductState extends State<EditProduct>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 getPrimaryCommanText(
-                    "Select Attribute".translate(context: context), true),
+                  "Select Attribute".translate(context: context),
+                  true,
+                ),
                 Row(
                   children: [
                     Checkbox(
                       value: editProvider!.variationBoolList[pos],
                       onChanged: (bool? value) {
-                        setState(
-                          () {
-                            editProvider!.variationBoolList[pos] =
-                                value ?? false;
-                          },
-                        );
+                        setState(() {
+                          editProvider!.variationBoolList[pos] = value ?? false;
+                        });
                       },
                     ),
                     IconButton(
@@ -2519,7 +2559,7 @@ class _EditProductState extends State<EditProduct>
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
             getCommanSizedBox(),
@@ -2544,10 +2584,14 @@ class _EditProductState extends State<EditProduct>
                   color: grey,
                   fontWeight: FontWeight.normal,
                 ),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                prefixIconConstraints:
-                    const BoxConstraints(minWidth: 40, maxHeight: 20),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                prefixIconConstraints: const BoxConstraints(
+                  minWidth: 40,
+                  maxHeight: 20,
+                ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.transparent),
                   borderRadius: BorderRadius.circular(circularBorderRadius7),
@@ -2567,32 +2611,32 @@ class _EditProductState extends State<EditProduct>
                     .toList();
 
                 addValAttribute(
-                    editProvider!.selectedAttributeValues[attributeId]!,
-                    attributeValues,
-                    attributeId!);
+                  editProvider!.selectedAttributeValues[attributeId]!,
+                  attributeValues,
+                  attributeId!,
+                );
               },
               child: Container(
-                  width: width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(circularBorderRadius7),
-                    color: white,
-                  ),
-                  constraints: const BoxConstraints(
-                    minHeight: 50,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Center(
-                      child: Text(
-                        "Add attribute value".translate(context: context),
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: textFontSize16,
-                          fontWeight: FontWeight.normal,
-                        ),
+                width: width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(circularBorderRadius7),
+                  color: white,
+                ),
+                constraints: const BoxConstraints(minHeight: 50),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Center(
+                    child: Text(
+                      "Add attribute value".translate(context: context),
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: textFontSize16,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ),
             getCommanSizedBox(),
             if ((editProvider!.selectedAttributeValues[attributeId!] ?? [])
@@ -2606,8 +2650,9 @@ class _EditProductState extends State<EditProduct>
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(circularBorderRadius10),
+                            borderRadius: BorderRadius.circular(
+                              circularBorderRadius10,
+                            ),
                             color: primary_app,
                             border: Border.all(
                               color: Colors.transparent,
@@ -2618,9 +2663,7 @@ class _EditProductState extends State<EditProduct>
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               value.value!,
-                              style: const TextStyle(
-                                color: white,
-                              ),
+                              style: const TextStyle(color: white),
                             ),
                           ),
                         ),
@@ -2639,19 +2682,11 @@ class _EditProductState extends State<EditProduct>
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         child: Container(
-          padding: const EdgeInsets.only(
-            top: 5,
-            bottom: 5,
-            left: 5,
-            right: 5,
-          ),
+          padding: const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 5),
           decoration: BoxDecoration(
             color: white,
             borderRadius: BorderRadius.circular(circularBorderRadius5),
-            border: Border.all(
-              color: grey2,
-              width: 1,
-            ),
+            border: Border.all(color: grey2, width: 1),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -2664,14 +2699,11 @@ class _EditProductState extends State<EditProduct>
                       editProvider!.variationList[pos].stockStatus == '1'
                           ? "In Stock".translate(context: context)
                           : "Out Of Stock".translate(context: context),
-                    )
+                    ),
                   ],
                 ),
               ),
-              const Icon(
-                Icons.arrow_drop_down,
-                color: primary,
-              )
+              const Icon(Icons.arrow_drop_down, color: primary),
             ],
           ),
         ),
@@ -2705,26 +2737,25 @@ class _EditProductState extends State<EditProduct>
       width: width * 0.4,
       focusNode: editProvider!.variountProductSKUFocus,
       onFieldSubmitted: (v) {
-        FocusScope.of(context)
-            .requestFocus(editProvider!.variountProductSKUFocus);
+        FocusScope.of(
+          context,
+        ).requestFocus(editProvider!.variountProductSKUFocus);
       },
     );
   }
 
-//==============================================================================
-//=========================== Add Product API Call =============================
+  //==============================================================================
+  //=========================== Add Product API Call =============================
 
   currentPage4() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        additionalInfo(),
-      ],
+      children: [additionalInfo()],
     );
   }
 
-//==============================================================================
-//=========================== Description ======================================
+  //==============================================================================
+  //=========================== Description ======================================
 
   getButtomBarButton() {
     return Positioned.directional(
@@ -2759,16 +2790,16 @@ class _EditProductState extends State<EditProduct>
                           } else if (editProvider!.currentPage == 4) {
                             editProvider!.currentPage = 3;
                           }
-                          setState(
-                            () {},
-                          );
+                          setState(() {});
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(circularBorderRadius7),
-                              color: white,
-                              border: Border.all(color: black)),
+                            borderRadius: BorderRadius.circular(
+                              circularBorderRadius7,
+                            ),
+                            color: white,
+                            border: Border.all(color: black),
+                          ),
                           height: 40,
                           child: Center(
                             child: Text(
@@ -2785,9 +2816,7 @@ class _EditProductState extends State<EditProduct>
                     )
                   : const SizedBox.shrink(),
               editProvider!.currentPage != 1
-                  ? const SizedBox(
-                      width: 10,
-                    )
+                  ? const SizedBox(width: 10)
                   : const SizedBox.shrink(),
               Expanded(
                 child: AppBtn(
@@ -2796,42 +2825,41 @@ class _EditProductState extends State<EditProduct>
                       if (editProvider!.productName == null ||
                           editProvider!.productName == '') {
                         setSnackbar(
-                          "Please select product Name"
-                              .translate(context: context),
+                          "Please select product Name".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       } else if (editProvider!.hsnCode == null) {
-                        setSnackbar(
-                          'Please Add HSN Code',
-                          context,
-                        );
+                        setSnackbar('Please Add HSN Code', context);
                       } else if (editProvider!.sortDescription == null ||
                           editProvider!.sortDescription == '') {
                         setSnackbar(
-                          "Please Add Short Description"
-                              .translate(context: context),
+                          "Please Add Short Description".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       } else {
-                        setState(
-                          () {
-                            editProvider!.currentPage = 2;
-                          },
-                        );
+                        setState(() {
+                          editProvider!.currentPage = 2;
+                        });
                       }
                     } else if (editProvider!.currentPage == 2) {
                       if (editProvider!.minOrderQuantity == null ||
                           editProvider!.minOrderQuantity == '') {
                         setSnackbar(
-                          "Please Add minimam Order Quantity"
-                              .translate(context: context),
+                          "Please Add minimam Order Quantity".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       } else if (editProvider!.quantityStepSize == null ||
                           editProvider!.quantityStepSize == '') {
                         setSnackbar(
-                          "Please Add Quantity Step Size"
-                              .translate(context: context),
+                          "Please Add Quantity Step Size".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       } else if (editProvider!.selectedCatID == null ||
@@ -2841,17 +2869,15 @@ class _EditProductState extends State<EditProduct>
                           context,
                         );
                       } else {
-                        setState(
-                          () {
-                            editProvider!.currentPage = 3;
-                          },
-                        );
+                        setState(() {
+                          editProvider!.currentPage = 3;
+                        });
                       }
-                    } else if (editProvider!.currentPage == 3) {
                       if (editProvider!.productImage == "") {
                         setSnackbar(
-                          "Please Add Product Main Image"
-                              .translate(context: context),
+                          "Please Add Product Main Image".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       }
@@ -2863,18 +2889,39 @@ class _EditProductState extends State<EditProduct>
                         );
                       }*/
                       else {
-                        setState(
-                          () {
-                            editProvider!.currentPage = 4;
-                          },
-                        );
+                        setState(() {
+                          editProvider!.currentPage = 3;
+                        });
                       }
-                    } else if (editProvider!.currentPage == 4) {
+                    } else if (editProvider!.currentPage == 3) {
+                      // if (editProvider!.productImage == "") {
+                      //   setSnackbar(
+                      //     "Please Add Product Main Image".translate(
+                      //       context: context,
+                      //     ),
+                      //     context,
+                      //   );
+                      // }
+                      // /*else if ((editProvider!.description == '' ||
+                      //     editProvider!.description == null)) {
+                      //   setSnackbar(
+                      //     "Please Add Description".translate(context: context),
+                      //     context,
+                      //   );
+                      // }*/
+                      // else {
+                      //   setState(() {
+                      //     editProvider!.currentPage = 4;
+                      //   });
+                      // }
                       validateAndSubmit();
                     }
+                    // else if (editProvider!.currentPage == 4) {
+                    //   validateAndSubmit();
+                    // }
                   },
                   height: 40,
-                  title: editProvider!.currentPage != 4
+                  title: editProvider!.currentPage != 3
                       ? "Next".translate(context: context)
                       : "Edit Product".translate(context: context),
                   btnAnim: editProvider!.buttonSqueezeanimation,
@@ -2889,8 +2936,8 @@ class _EditProductState extends State<EditProduct>
     );
   }
 
-//==============================================================================
-//=========================== Body Part ========================================
+  //==============================================================================
+  //=========================== Body Part ========================================
 
   getBodyPart() {
     return SizedBox(
@@ -2913,18 +2960,16 @@ class _EditProductState extends State<EditProduct>
                     editProvider!.currentPage == 1
                         ? currentPage1(context, setStateNow)
                         : Container(),
+                    // editProvider!.currentPage == 2
+                    //     ? currentPage2(context, setStateNow)
+                    //     : Container(),
                     editProvider!.currentPage == 2
-                        ? currentPage2(context, setStateNow)
-                        : Container(),
-                    editProvider!.currentPage == 3
                         ? currentPage3(context, setStateNow)
                         : Container(),
-                    editProvider!.currentPage == 4
+                    editProvider!.currentPage == 3
                         ? currentPage4()
                         : Container(),
-                    const SizedBox(
-                      height: 65,
-                    ),
+                    const SizedBox(height: 65),
                   ],
                 ),
               ),
@@ -2943,8 +2988,9 @@ class _EditProductState extends State<EditProduct>
     for (var i = 0; i < editProvider!.variationBoolList.length; i++) {
       if (editProvider!.variationBoolList[i]) {
         final attributes = editProvider!.attributesList
-            .where((element) =>
-                element.name == editProvider!.attrController[i].text)
+            .where(
+              (element) => element.name == editProvider!.attrController[i].text,
+            )
             .toList();
         if (attributes.isNotEmpty) {
           attributeIds.add(attributes.first.id!);
@@ -3022,11 +3068,13 @@ class _EditProductState extends State<EditProduct>
         } else if (editProvider!.simpleProductPriceController.text.isNotEmpty &&
             editProvider!.simpleProductSpecialPriceController.text.isNotEmpty &&
             double.parse(
-                    editProvider!.simpleProductSpecialPriceController.text) >
+                  editProvider!.simpleProductSpecialPriceController.text,
+                ) >
                 double.parse(editProvider!.simpleProductPriceController.text)) {
           setSnackbar(
-            "Special price can not greater than price"
-                .translate(context: context),
+            "Special price can not greater than price".translate(
+              context: context,
+            ),
             context,
           );
           return false;
@@ -3143,11 +3191,7 @@ class _EditProductState extends State<EditProduct>
                     }
                   },
                   child: const Center(
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: white,
-                      size: 25,
-                    ),
+                    child: Icon(Icons.arrow_back, color: white, size: 25),
                   ),
                 ),
               );
@@ -3166,11 +3210,8 @@ class _EditProductState extends State<EditProduct>
               ),
               SizedBox(width: width * 0.1),
               Text(
-                "${"Step".translate(context: context)} ${editProvider!.currentPage} ${"of".translate(context: context)} 4",
-                style: const TextStyle(
-                  color: white,
-                  fontSize: textFontSize14,
-                ),
+                "${"Step".translate(context: context)} ${editProvider!.currentPage} ${"of".translate(context: context)} 3",
+                style: const TextStyle(color: white, fontSize: textFontSize14),
               ),
             ],
           ),

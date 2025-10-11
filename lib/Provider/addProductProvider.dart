@@ -42,32 +42,32 @@ class AddProductProvider extends ChangeNotifier {
     sortDescription = null;
     extraDescription = null;
     digitalProductName = '';
-    tags = null;
+    // tags = null;
     // taxId = null;
     indicatorValue = null;
-    madeIn = null;
-    totalAllowQuantity = null;
-    minOrderQuantity = null;
-    quantityStepSize = null;
-    warrantyPeriod = null;
-    guaranteePeriod = null;
+    // madeIn = null;
+    // totalAllowQuantity = null;
+    // minOrderQuantity = null;
+    // quantityStepSize = null;
+    // warrantyPeriod = null;
+    // guaranteePeriod = null;
     deliverabletypeValue = "1";
     deliverableZipcodes = null;
     deliverableCities.clear();
-    taxincludedinPrice = "0";
-    isCODAllow = "0";
-    isReturnable = "0";
-    isCancelable = "0";
-    isAttachmentRequired = "0";
+    // taxincludedinPrice = "0";
+    // isCODAllow = "0";
+    // isReturnable = "0";
+    // isCancelable = "0";
+    // isAttachmentRequired = "0";
     tillwhichstatus = null;
     selectedCatName = null;
     // selectedTaxID = null;
     isToggled = false;
     isreturnable = false;
     digitalProductDownloaded = false;
-    isCODallow = false;
-    iscancelable = false;
-    taxincludedInPrice = false;
+    // isCODallow = false;
+    // iscancelable = false;
+    // taxincludedInPrice = false;
     attributeIndiacator = 0;
     selCityPos = -1;
     country = null;
@@ -111,12 +111,12 @@ class AddProductProvider extends ChangeNotifier {
     digitalProductSaveSettings = false;
     variantProductProductLevelSaveSettings = false;
     variantProductVariableLevelSaveSettings = false;
-    selectedBrandName = null;
+    // selectedBrandName = null;
     selectedPickUpLocation = null;
 
     selectedDigitalLinkType = null;
-    selectedBrandId = null;
-    taxesList = [];
+    // selectedBrandId = null;
+    // taxesList = [];
     attributeSetList = [];
     attributesList = [];
     attributesValueList = [];
@@ -447,10 +447,10 @@ class AddProductProvider extends ChangeNotifier {
     notifyListeners();
   } // extra_description
 
-  settags(String? value) {
-    tags = value;
-    notifyListeners();
-  } // Tags
+  // settags(String? value) {
+  //   tags = value;
+  //   notifyListeners();
+  // } // Tags
 
   // settaxId(String? value) {
   //   taxId = value;
@@ -462,35 +462,35 @@ class AddProductProvider extends ChangeNotifier {
     notifyListeners();
   } // indicator
 
-  settmadeIn(String? value) {
-    madeIn = value;
-    notifyListeners();
-  } //made_in
+  // settmadeIn(String? value) {
+  //   madeIn = value;
+  //   notifyListeners();
+  // } //made_in
 
-  settotalAllowQuantity(String? value) {
-    totalAllowQuantity = value;
-    notifyListeners();
-  } // total_allowed_quantity
+  // settotalAllowQuantity(String? value) {
+  //   totalAllowQuantity = value;
+  //   notifyListeners();
+  // } // total_allowed_quantity
 
-  setminOrderQuantity(String? value) {
-    minOrderQuantity = value;
-    notifyListeners();
-  } // minimum_order_quantity
+  // setminOrderQuantity(String? value) {
+  //   minOrderQuantity = value;
+  //   notifyListeners();
+  // } // minimum_order_quantity
 
-  setquantityStepSize(String? value) {
-    quantityStepSize = value;
-    notifyListeners();
-  } // quantity_step_size
+  // setquantityStepSize(String? value) {
+  //   quantityStepSize = value;
+  //   notifyListeners();
+  // } // quantity_step_size
 
-  setwarrantyPeriod(String? value) {
-    warrantyPeriod = value;
-    notifyListeners();
-  } //warranty_period
+  // setwarrantyPeriod(String? value) {
+  //   warrantyPeriod = value;
+  //   notifyListeners();
+  // } //warranty_period
 
-  setguaranteePeriod(String? value) {
-    guaranteePeriod = value;
-    notifyListeners();
-  } //guarantee_period
+  // setguaranteePeriod(String? value) {
+  //   guaranteePeriod = value;
+  //   notifyListeners();
+  // } //guarantee_period
 
   Future<void> addProductAPI(
     List<String> attributesValuesIds,
@@ -503,23 +503,23 @@ class AddProductProvider extends ChangeNotifier {
         var request = http.MultipartRequest("POST", addProductsApi);
 
         if (currentSellectedProductIsPysical) {
-          if (hsnCode != null) {
-            request.fields['hsn_code'] = hsnCode!;
-          }
+          // if (hsnCode != null) {
+          //   request.fields['hsn_code'] = hsnCode!;
+          // }
           if (indicatorValue != null) {
             request.fields[Indicator] = indicatorValue!;
           }
-          if (totalAllowQuantity != null) {
-            request.fields[TotalAllowedQuantity] = totalAllowQuantity!;
-          }
-          request.fields[MinimumOrderQuantity] = minOrderQuantity!;
-          request.fields[QuantityStepSize] = quantityStepSize!;
-          if (warrantyPeriod != null) {
-            request.fields[WarrantyPeriod] = warrantyPeriod!;
-          }
-          if (guaranteePeriod != null) {
-            request.fields[GuaranteePeriod] = guaranteePeriod!;
-          }
+          // if (totalAllowQuantity != null) {
+          //   request.fields[TotalAllowedQuantity] = totalAllowQuantity!;
+          // }
+          request.fields[MinimumOrderQuantity] = 1.toString();
+          // request.fields[QuantityStepSize] = quantityStepSize!;
+          // if (warrantyPeriod != null) {
+          //   request.fields[WarrantyPeriod] = warrantyPeriod!;
+          // }
+          // if (guaranteePeriod != null) {
+          //   request.fields[GuaranteePeriod] = guaranteePeriod!;
+          // }
 
           if (AppSettingsRepository.appSettings.isCityWiseDeliveribility) {
             request.fields[DeliverableCityType] = deliverabletypeValue!;
@@ -530,10 +530,10 @@ class AddProductProvider extends ChangeNotifier {
             request.fields[DeliverableType] = deliverabletypeValue!;
             request.fields[DeliverableZipcodes] = deliverableZipcodes ?? "";
           }
-          request.fields[CodAllowed] = isCODAllow!;
-          request.fields[IsReturnable] = isReturnable!;
-          request.fields[IsCancelable] = isCancelable!;
-          request.fields[IsAttachmentRequired] = isAttachmentRequired!;
+          // request.fields[CodAllowed] = isCODAllow!;
+          // request.fields[IsReturnable] = isReturnable!;
+          // request.fields[IsCancelable] = isCancelable!;
+          // request.fields[IsAttachmentRequired] = isAttachmentRequired!;
           // if (tillwhichstatus != null) {
           //   request.fields[CancelableTill] = tillwhichstatus!;
           // }
@@ -545,15 +545,15 @@ class AddProductProvider extends ChangeNotifier {
         if (extraDescription != null) {
           request.fields[ExtraInputDesc] = extraDescription!;
         }
-        if (tags != null) {
-          request.fields[Tags] = tags!;
-        }
-        if (selectedTax.isNotEmpty) {
-          request.fields[ProInputTax] = selectedTax
-              .map((e) => e.id)
-              .toList()
-              .join(',');
-        }
+        // if (tags != null) {
+        //   request.fields[Tags] = tags!;
+        // }
+        // if (selectedTax.isNotEmpty) {
+        //   request.fields[ProInputTax] = selectedTax
+        //       .map((e) => e.id)
+        //       .toList()
+        //       .join(',');
+        // }
         // if (taxId != null) {
         //   request.fields[ProInputTax] = taxId!;
         // }
@@ -581,20 +581,20 @@ class AddProductProvider extends ChangeNotifier {
         // if (selectedBrandName != null) {
         //   request.fields['brand'] = selectedBrandName!;
         // }
-        if (selectedBrandId != null) {
-          request.fields['brand_id'] = selectedBrandId!;
-        }
+        // if (selectedBrandId != null) {
+        //   request.fields['brand_id'] = selectedBrandId!;
+        // }
         if (selectedPickUpLocation != null) {
           request.fields[PICKUP_LOCATION] = selectedPickUpLocation!;
         }
         request.fields[CategoryId] = selectedCatID!;
         request.fields[ProductType] = productType!;
-        if (lowStockLimit != null) {
-          request.fields[LOW_STOCK_LIMIT] = lowStockLimit!;
-        }
-        if (productType == 'variable_product') {
-          request.fields[VariantStockLevelType] = variantStockLevelType!;
-        }
+        // if (lowStockLimit != null) {
+        //   request.fields[LOW_STOCK_LIMIT] = lowStockLimit!;
+        // }
+        // if (productType == 'variable_product') {
+        //   request.fields[VariantStockLevelType] = variantStockLevelType!;
+        // }
         request.fields[AttributeValues] = attributesValuesIds.join(",");
 
         if (productType == 'simple_product') {
@@ -625,138 +625,139 @@ class AddProductProvider extends ChangeNotifier {
           if (length != null) {
             request.fields[LENGTH] = length!;
           }
-        } else if (productType == 'variable_product') {
-          String val = '',
-              price = '',
-              sprice = '',
-              images = '',
-              height = '',
-              weight = '',
-              length = '',
-              breadth = '';
-          List<List<String>> imagesList = [];
-          for (int i = 0; i < variationList.length; i++) {
-            if (val == '') {
-              val = variationList[i].id!.replaceAll(',', ' ');
-              price = variationList[i].price!;
-              sprice = variationList[i].disPrice ?? ' ';
-            } else {
-              val = "$val,${variationList[i].id!.replaceAll(',', ' ')}";
-              price = "$price,${variationList[i].price!}";
-              sprice = "$sprice,${variationList[i].disPrice ?? ' '}";
-            }
-            if (variationList[i].height != null) {
-              if (height != '') {
-                height = '$height,${variationList[i].height!}';
-              } else {
-                height = variationList[i].height!;
-              }
-            }
-
-            if (variationList[i].weight != null) {
-              if (weight != '') {
-                weight = '$weight,${variationList[i].weight!}';
-              } else {
-                weight = variationList[i].weight!;
-              }
-            }
-
-            if (variationList[i].breadth != null) {
-              if (breadth != '') {
-                breadth = '$breadth,${variationList[i].breadth!}';
-              } else {
-                breadth = variationList[i].breadth!;
-              }
-            }
-
-            if (variationList[i].length != null) {
-              if (length != '') {
-                length = '$length,${variationList[i].length!}';
-              } else {
-                length = variationList[i].length!;
-              }
-            }
-
-            if (variationList[i].imageRelativePath != null) {
-              if (variationList[i].imageRelativePath!.isNotEmpty &&
-                  images != '') {
-                images =
-                    '$images,${variationList[i].imageRelativePath!.join(",")}';
-              } else if (variationList[i].imageRelativePath!.isNotEmpty &&
-                  images == '') {
-                images = variationList[i].imageRelativePath!.join(",");
-              }
-
-              List<String> subListofImage = images.split(',');
-              images = "";
-
-              for (int j = 0; j < subListofImage.length; j++) {
-                subListofImage[j] = '"${subListofImage[j]}"';
-              }
-              imagesList.add(subListofImage);
-            }
-          }
-
-          if (height != '') {
-            request.fields[HEIGHT] = height;
-          }
-          if (weight != '') {
-            request.fields[WEIGHT] = weight;
-          }
-          if (length != '') {
-            request.fields[LENGTH] = length;
-          }
-          if (breadth != '') {
-            request.fields[BREADTH] = breadth;
-          }
-          request.fields[VariantsIds] = val;
-          request.fields[VariantPrice] = price;
-          request.fields[VariantSpecialPrice] = sprice;
-          request.fields[variant_images] = imagesList.toString();
-          if (isStockSelected != null && isStockSelected == true) {
-            if (variantStockLevelType == 'product_level') {
-              request.fields[SkuVariantType] =
-                  variountProductSKUController.text;
-              request.fields[TotalStockVariantType] =
-                  variountProductTotalStock.text;
-              request.fields[VariantStatus] = stockStatus;
-            } else if (variantStockLevelType == 'variable_level') {
-              String sku = '', totalStock = '', stkStatus = '';
-              for (int i = 0; i < variationList.length; i++) {
-                if (sku == '') {
-                  sku = variationList[i].sku!;
-                  totalStock = variationList[i].stock!;
-                  stkStatus = variationList[i].stockStatus!;
-                } else {
-                  sku = "$sku,${variationList[i].sku!}";
-                  totalStock = "$totalStock,${variationList[i].stock!}";
-                  stkStatus = "$stkStatus,${variationList[i].stockStatus!}";
-                }
-              }
-              request.fields[VariantSku] = sku;
-              request.fields[VariantTotalStock] = totalStock;
-              request.fields[VariantLevelStockStatus] = stkStatus;
-            }
-            request.fields[VariantStockStatus] = "0";
-          }
-        } else if (productType == 'digital_product') {
-          request.fields['download_allowed'] = digitalProductDownloaded
-              ? "1"
-              : "0";
-          request.fields[SimplePrice] = digitalPriceController.text;
-          request.fields[SimpleSpecialPrice] = digitalSpecialController.text;
-          if (digitalProductDownloaded) {
-            if (selectedDigitalProductTypeOfDownloadLink == 'self_hosted') {
-              request.fields['download_link_type'] = "self_hosted";
-              request.fields['pro_input_zip'] = "1";
-            }
-            if (selectedDigitalProductTypeOfDownloadLink == 'Add Link') {
-              request.fields['download_link_type'] = "add_link";
-              request.fields['download_link'] =
-                  selfHostedDigitalProductURLController.text;
-            }
-          }
         }
+        //else if (productType == 'variable_product') {
+        //   String val = '',
+        //       price = '',
+        //       sprice = '',
+        //       images = '',
+        //       height = '',
+        //       weight = '',
+        //       length = '',
+        //       breadth = '';
+        //   List<List<String>> imagesList = [];
+        //   for (int i = 0; i < variationList.length; i++) {
+        //     if (val == '') {
+        //       val = variationList[i].id!.replaceAll(',', ' ');
+        //       price = variationList[i].price!;
+        //       sprice = variationList[i].disPrice ?? ' ';
+        //     } else {
+        //       val = "$val,${variationList[i].id!.replaceAll(',', ' ')}";
+        //       price = "$price,${variationList[i].price!}";
+        //       sprice = "$sprice,${variationList[i].disPrice ?? ' '}";
+        //     }
+        //     if (variationList[i].height != null) {
+        //       if (height != '') {
+        //         height = '$height,${variationList[i].height!}';
+        //       } else {
+        //         height = variationList[i].height!;
+        //       }
+        //     }
+
+        //     if (variationList[i].weight != null) {
+        //       if (weight != '') {
+        //         weight = '$weight,${variationList[i].weight!}';
+        //       } else {
+        //         weight = variationList[i].weight!;
+        //       }
+        //     }
+
+        //     if (variationList[i].breadth != null) {
+        //       if (breadth != '') {
+        //         breadth = '$breadth,${variationList[i].breadth!}';
+        //       } else {
+        //         breadth = variationList[i].breadth!;
+        //       }
+        //     }
+
+        //     if (variationList[i].length != null) {
+        //       if (length != '') {
+        //         length = '$length,${variationList[i].length!}';
+        //       } else {
+        //         length = variationList[i].length!;
+        //       }
+        //     }
+
+        //     if (variationList[i].imageRelativePath != null) {
+        //       if (variationList[i].imageRelativePath!.isNotEmpty &&
+        //           images != '') {
+        //         images =
+        //             '$images,${variationList[i].imageRelativePath!.join(",")}';
+        //       } else if (variationList[i].imageRelativePath!.isNotEmpty &&
+        //           images == '') {
+        //         images = variationList[i].imageRelativePath!.join(",");
+        //       }
+
+        //       List<String> subListofImage = images.split(',');
+        //       images = "";
+
+        //       for (int j = 0; j < subListofImage.length; j++) {
+        //         subListofImage[j] = '"${subListofImage[j]}"';
+        //       }
+        //       imagesList.add(subListofImage);
+        //     }
+        //   }
+
+        //   if (height != '') {
+        //     request.fields[HEIGHT] = height;
+        //   }
+        //   if (weight != '') {
+        //     request.fields[WEIGHT] = weight;
+        //   }
+        //   if (length != '') {
+        //     request.fields[LENGTH] = length;
+        //   }
+        //   if (breadth != '') {
+        //     request.fields[BREADTH] = breadth;
+        //   }
+        //   request.fields[VariantsIds] = val;
+        //   request.fields[VariantPrice] = price;
+        //   request.fields[VariantSpecialPrice] = sprice;
+        //   request.fields[variant_images] = imagesList.toString();
+        //   if (isStockSelected != null && isStockSelected == true) {
+        //     if (variantStockLevelType == 'product_level') {
+        //       request.fields[SkuVariantType] =
+        //           variountProductSKUController.text;
+        //       request.fields[TotalStockVariantType] =
+        //           variountProductTotalStock.text;
+        //       request.fields[VariantStatus] = stockStatus;
+        //     } else if (variantStockLevelType == 'variable_level') {
+        //       String sku = '', totalStock = '', stkStatus = '';
+        //       for (int i = 0; i < variationList.length; i++) {
+        //         if (sku == '') {
+        //           sku = variationList[i].sku!;
+        //           totalStock = variationList[i].stock!;
+        //           stkStatus = variationList[i].stockStatus!;
+        //         } else {
+        //           sku = "$sku,${variationList[i].sku!}";
+        //           totalStock = "$totalStock,${variationList[i].stock!}";
+        //           stkStatus = "$stkStatus,${variationList[i].stockStatus!}";
+        //         }
+        //       }
+        //       request.fields[VariantSku] = sku;
+        //       request.fields[VariantTotalStock] = totalStock;
+        //       request.fields[VariantLevelStockStatus] = stkStatus;
+        //     }
+        //     request.fields[VariantStockStatus] = "0";
+        //   }
+        // } else if (productType == 'digital_product') {
+        //   request.fields['download_allowed'] = digitalProductDownloaded
+        //       ? "1"
+        //       : "0";
+        //   request.fields[SimplePrice] = digitalPriceController.text;
+        //   request.fields[SimpleSpecialPrice] = digitalSpecialController.text;
+        //   if (digitalProductDownloaded) {
+        //     if (selectedDigitalProductTypeOfDownloadLink == 'self_hosted') {
+        //       request.fields['download_link_type'] = "self_hosted";
+        //       request.fields['pro_input_zip'] = "1";
+        //     }
+        //     if (selectedDigitalProductTypeOfDownloadLink == 'Add Link') {
+        //       request.fields['download_link_type'] = "add_link";
+        //       request.fields['download_link'] =
+        //           selfHostedDigitalProductURLController.text;
+        //     }
+        //   }
+        // }
 
         print("request field******${request.fields}****${request.files}");
         var response = await request.send();

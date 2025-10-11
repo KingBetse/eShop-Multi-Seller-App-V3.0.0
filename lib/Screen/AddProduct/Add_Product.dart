@@ -35,13 +35,13 @@ late int col;
 AddProductProvider? addProvider;
 
 class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
-//------------------------------------------------------------------------------
-//========================= For Form Validation ================================
+  //------------------------------------------------------------------------------
+  //========================= For Form Validation ================================
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-//------------------------------------------------------------------------------
-//========================= For Animation ======================================
+  //------------------------------------------------------------------------------
+  //========================= For Animation ======================================
 
   Future<void> _playAnimation() async {
     try {
@@ -49,8 +49,8 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
     } on TickerCanceled {}
   }
 
-//------------------------------------------------------------------------------
-//========================= InIt MEthod ========================================
+  //------------------------------------------------------------------------------
+  //========================= InIt MEthod ========================================
   @override
   void initState() {
     addProvider = Provider.of<AddProductProvider>(context, listen: false);
@@ -60,42 +60,40 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
     addProvider!.uploadedVideoName = "";
     addProvider!.countryScrollController.addListener(_scrollListener);
     addProvider!.brandScrollController.addListener(_brandScrollListener);
-    addProvider!.pickUpLocationScrollController
-        .addListener(_pickUpLocationScrollListener);
+    addProvider!.pickUpLocationScrollController.addListener(
+      _pickUpLocationScrollListener,
+    );
     getAllData();
 
     addProvider!.buttonController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
     addProvider!.productImage = '';
     addProvider!.productImageUrl = '';
     addProvider!.uploadedVideoName = '';
     addProvider!.otherPhotos = [];
     addProvider!.otherImageUrl = [];
-    addProvider!.buttonSqueezeanimation = Tween(
-      begin: double.maxFinite,
-      end: 50.0,
-    ).animate(
-      CurvedAnimation(
-        parent: addProvider!.buttonController!,
-        curve: const Interval(
-          0.0,
-          0.150,
-        ),
-      ),
-    );
+    addProvider!.buttonSqueezeanimation =
+        Tween(begin: double.maxFinite, end: 50.0).animate(
+          CurvedAnimation(
+            parent: addProvider!.buttonController!,
+            curve: const Interval(0.0, 0.150),
+          ),
+        );
     super.initState();
   }
 
   getAllData() async {
     isNetworkAvail = await isNetworkAvailable();
     if (isNetworkAvail) {
-      await context.read<BrandProvider>().setBrands(true).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<BrandProvider>().errorMessage, context);
-          }
-        },
-      );
+      // await context.read<BrandProvider>().setBrands(true).then(
+      //   (value) {
+      //     if (value == true) {
+      //       setSnackbar(context.read<BrandProvider>().errorMessage, context);
+      //     }
+      //   },
+      // );
       if (mounted && addProvider!.brandState != null) {
         if (mounted) {
           setState(() {});
@@ -105,14 +103,14 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
       await context
           .read<PickUpLocationProvider>()
           .getPickUpLocations(context, 1)
-          .then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<PickUpLocationProvider>().errorMessage, context);
-          }
-        },
-      );
+          .then((value) {
+            if (value == true) {
+              setSnackbar(
+                context.read<PickUpLocationProvider>().errorMessage,
+                context,
+              );
+            }
+          });
       if (mounted && addProvider!.pickUpLocationState != null) {
         if (mounted) {
           setState(() {});
@@ -120,13 +118,13 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
       }
 
       //get Country
-      await context.read<CountryProvider>().setCountrys(false, true).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<CountryProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<CountryProvider>().setCountrys(false, true).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<CountryProvider>().errorMessage, context);
+        }
+      });
       if (mounted && addProvider!.countryState != null) {
         if (mounted) {
           setState(() {});
@@ -134,78 +132,63 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
       }
 
       //get zipCode
-      await context
-          .read<ZipcodeProvider>()
-          .setZipCode(ProductAction.addProduct)
-          .then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<ZipcodeProvider>().errorMessage, context);
-          }
-        },
-      );
+      // await context
+      //     .read<ZipcodeProvider>()
+      //     .setZipCode(ProductAction.addProduct)
+      //     .then(
+      //   (value) {
+      //     if (value == true) {
+      //       setSnackbar(context.read<ZipcodeProvider>().errorMessage, context);
+      //     }
+      //   },
+      // );
       //get cities
       await context.read<CityProvider>().getCities();
 
       // get tax
-      await context.read<TaxProvider>().setTax(true).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<TaxProvider>().errorMessage, context);
-          }
-        },
-      );
+      // await context.read<TaxProvider>().setTax(true).then(
+      //   (value) {
+      //     if (value == true) {
+      //       setSnackbar(context.read<TaxProvider>().errorMessage, context);
+      //     }
+      //   },
+      // );
 
       // get category
-      await context
-          .read<CategoryProvider>()
-          .setCategory(
-            true,
-            context,
-          )
-          .then(
-        (value) {
-          if (value == true) {
-            setSnackbar(context.read<CategoryProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<CategoryProvider>().setCategory(true, context).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<CategoryProvider>().errorMessage, context);
+        }
+      });
       // get attribute set
-      await context.read<AttributeProvider>().setAttributeSet(true).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<AttributeProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<AttributeProvider>().setAttributeSet(true).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<AttributeProvider>().errorMessage, context);
+        }
+      });
       // get attribute
-      await context.read<AttributeProvider>().setAttributes(true).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<AttributeProvider>().errorMessage, context);
-          }
-        },
-      );
+      await context.read<AttributeProvider>().setAttributes(true).then((value) {
+        if (value == true) {
+          setSnackbar(context.read<AttributeProvider>().errorMessage, context);
+        }
+      });
       // get attribute value
-      await context.read<AttributeProvider>().setAttributesValue(true).then(
-        (value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<AttributeProvider>().errorMessage, context);
-          }
-        },
-      );
-      setState(
-        () {},
-      );
+      await context.read<AttributeProvider>().setAttributesValue(true).then((
+        value,
+      ) {
+        if (value == true) {
+          setSnackbar(context.read<AttributeProvider>().errorMessage, context);
+        }
+      });
+      setState(() {});
     } else {
-      setState(
-        () {
-          isNetworkAvail = false;
-        },
-      );
+      setState(() {
+        isNetworkAvail = false;
+      });
     }
   }
 
@@ -222,10 +205,9 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
         });
 
         //get Country
-        await context
-            .read<CountryProvider>()
-            .setCountrys(false, true)
-            .then((value) {
+        await context.read<CountryProvider>().setCountrys(false, true).then((
+          value,
+        ) {
           if (value == true) {
             setSnackbar(context.read<CountryProvider>().errorMessage, context);
           }
@@ -267,7 +249,9 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
   _pickUpLocationScrollListener() async {
     if (addProvider!.pickUpLocationScrollController.offset >=
             addProvider!
-                .pickUpLocationScrollController.position.maxScrollExtent &&
+                .pickUpLocationScrollController
+                .position
+                .maxScrollExtent &&
         !addProvider!.pickUpLocationScrollController.position.outOfRange) {
       if (mounted) {
         setState(() {});
@@ -282,11 +266,13 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
             .read<PickUpLocationProvider>()
             .getPickUpLocations(context, 1)
             .then((value) {
-          if (value == true) {
-            setSnackbar(
-                context.read<PickUpLocationProvider>().errorMessage, context);
-          }
-        });
+              if (value == true) {
+                setSnackbar(
+                  context.read<PickUpLocationProvider>().errorMessage,
+                  context,
+                );
+              }
+            });
         if (mounted && addProvider!.pickUpLocationState != null) {
           addProvider!.pickUpLocationState!(() {});
         }
@@ -295,8 +281,8 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
     }
   }
 
-//------------------------------------------------------------------------------
-//========================= Video Type =========================================
+  //------------------------------------------------------------------------------
+  //========================= Video Type =========================================
 
   videoUrlEnterField(String hinttitle) {
     return Container(
@@ -308,10 +294,7 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
         },
         keyboardType: TextInputType.text,
         controller: addProvider!.vidioTypeController,
-        style: const TextStyle(
-          color: fontColor,
-          fontWeight: FontWeight.normal,
-        ),
+        style: const TextStyle(color: fontColor, fontWeight: FontWeight.normal),
         focusNode: addProvider!.vidioTypeFocus,
         textInputAction: TextInputAction.next,
         onChanged: (String? value) {
@@ -321,10 +304,14 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
           filled: true,
           fillColor: lightWhite1,
           hintText: hinttitle,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          prefixIconConstraints:
-              const BoxConstraints(minWidth: 40, maxHeight: 20),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 5,
+          ),
+          prefixIconConstraints: const BoxConstraints(
+            minWidth: 40,
+            maxHeight: 20,
+          ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: fontColor),
             borderRadius: BorderRadius.circular(circularBorderRadius7),
@@ -339,27 +326,23 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
   }
 
   update() {
-    setState(
-      () {},
-    );
+    setState(() {});
   }
 
   updateCountry() async {
-    await context.read<CountryProvider>().setCountrys(true, true).then(
-      (value) {
-        if (value == true) {
-          setSnackbar(context.read<CountryProvider>().errorMessage, context);
-        }
-      },
-    );
+    await context.read<CountryProvider>().setCountrys(true, true).then((value) {
+      if (value == true) {
+        setSnackbar(context.read<CountryProvider>().errorMessage, context);
+      }
+    });
     if (mounted && addProvider!.countryState != null) {
       addProvider!.countryState!(() {});
     }
     if (mounted) setState(() {});
   }
 
-//==============================================================================
-//=========================== Body Part ========================================
+  //==============================================================================
+  //=========================== Body Part ========================================
 
   getBodyPart() {
     return SizedBox(
@@ -382,18 +365,16 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
                     addProvider!.currentPage == 1
                         ? currentPage1(context, update, updateCountry)
                         : Container(),
+                    // addProvider!.currentPage == 2
+                    //     ? currentPage2(context, update, updateCountry)
+                    //     : Container(),
                     addProvider!.currentPage == 2
-                        ? currentPage2(context, update, updateCountry)
-                        : Container(),
-                    addProvider!.currentPage == 3
                         ? currentPage3(context, update, updateCountry)
                         : Container(),
-                    addProvider!.currentPage == 4
+                    addProvider!.currentPage == 3
                         ? currentPage4(context, update, updateCountry)
                         : Container(),
-                    const SizedBox(
-                      height: 65,
-                    )
+                    const SizedBox(height: 65),
                   ],
                 ),
               ),
@@ -435,17 +416,20 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
                             addProvider!.setCurrentPageValue(1);
                           } else if (addProvider!.currentPage == 3) {
                             addProvider!.setCurrentPageValue(2);
-                          } else if (addProvider!.currentPage == 4) {
-                            addProvider!.setCurrentPageValue(3);
                           }
+                          // else if (addProvider!.currentPage == 4) {
+                          //   addProvider!.setCurrentPageValue(3);
+                          // }
                           setState(() {});
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(circularBorderRadius7),
-                              color: white,
-                              border: Border.all(color: black)),
+                            borderRadius: BorderRadius.circular(
+                              circularBorderRadius7,
+                            ),
+                            color: white,
+                            border: Border.all(color: black),
+                          ),
                           height: 40,
                           child: Center(
                             child: Text(
@@ -462,9 +446,7 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
                     )
                   : const SizedBox.shrink(),
               addProvider!.currentPage != 1
-                  ? const SizedBox(
-                      width: 10,
-                    )
+                  ? const SizedBox(width: 10)
                   : const SizedBox.shrink(),
               Expanded(
                 child: AppBtn(
@@ -472,14 +454,16 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
                     if (addProvider!.currentPage == 1) {
                       if (addProvider!.productName == null) {
                         setSnackbar(
-                          "Please select product Name"
-                              .translate(context: context),
+                          "Please select product Name".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       } else if (addProvider!.sortDescription == null) {
                         setSnackbar(
-                          "Please Add Short Description"
-                              .translate(context: context),
+                          "Please Add Short Description".translate(
+                            context: context,
+                          ),
                           context,
                         );
                       } else {
@@ -487,48 +471,51 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
                         setState(() {});
                       }
                     } else if (addProvider!.currentPage == 2) {
+                      addProvider!.minOrderQuantity = 1.toString();
                       if (addProvider!.currentSellectedProductIsPysical &&
                           addProvider!.minOrderQuantity == null) {
                         setSnackbar(
-                          "Please Add minimam Order Quantity"
-                              .translate(context: context),
+                          "Please Add minimam Order Quantity".translate(
+                            context: context,
+                          ),
                           context,
                         );
-                      } else if (addProvider!.quantityStepSize == null &&
-                          addProvider!.currentSellectedProductIsPysical) {
-                        setSnackbar(
-                          "Please Add Quantity Step Size"
-                              .translate(context: context),
-                          context,
-                        );
-                      } else if (addProvider!.selectedCatID == null) {
+                      }
+                      //  else if (addProvider!.quantityStepSize == null &&
+                      //     addProvider!.currentSellectedProductIsPysical) {
+                      //   setSnackbar(
+                      //     "Please Add Quantity Step Size".translate(
+                      //       context: context,
+                      //     ),
+                      //     context,
+                      //   );
+                      // }
+                      else if (addProvider!.selectedCatID == null) {
                         setSnackbar(
                           "Please select category".translate(context: context),
                           context,
                         );
+
+                        if (addProvider!.productImage == "") {
+                          setSnackbar(
+                            "Please Add Product Main Image".translate(
+                              context: context,
+                            ),
+                            context,
+                          );
+                        }
                       } else {
                         addProvider!.setCurrentPageValue(3);
 
                         setState(() {});
                       }
                     } else if (addProvider!.currentPage == 3) {
-                      if (addProvider!.productImage == "") {
-                        setSnackbar(
-                          "Please Add Product Main Image"
-                              .translate(context: context),
-                          context,
-                        );
-                      } else {
-                        addProvider!.setCurrentPageValue(4);
-
-                        setState(() {});
-                      }
-                    } else if (addProvider!.currentPage == 4) {
                       validateAndSubmit();
                     }
+                    // else if (addProvider!.currentPage == 4) {}
                   },
                   height: 40,
-                  title: addProvider!.currentPage != 4
+                  title: addProvider!.currentPage != 3
                       ? "Next".translate(context: context)
                       : "Add Product".translate(context: context),
                   btnAnim: addProvider!.buttonSqueezeanimation,
@@ -543,7 +530,7 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
     );
   }
 
-//==============================================================================
+  //==============================================================================
   void validateAndSubmit() async {
     List<String> attributeIds = [];
     List<String> attributesValuesIds = [];
@@ -551,8 +538,9 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
     for (var i = 0; i < addProvider!.variationBoolList.length; i++) {
       if (addProvider!.variationBoolList[i]) {
         final attributes = addProvider!.attributesList
-            .where((element) =>
-                element.name == addProvider!.attrController[i].text)
+            .where(
+              (element) => element.name == addProvider!.attrController[i].text,
+            )
             .toList();
         if (attributes.isNotEmpty) {
           attributeIds.add(attributes.first.id!);
@@ -572,6 +560,8 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
 
   bool validateAndSave() {
     final form = _formkey.currentState!;
+    addProvider!.productType == 'simple_product';
+    print(addProvider!.productType);
     form.save();
     if (form.validate()) {
       if (addProvider!.description == '' && addProvider!.description == null) {
@@ -615,83 +605,88 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
         );
         return false;
       } else if (addProvider!.productType == null) {
+        print("---product type is ${addProvider!.productType}----");
         setSnackbar(
           "Please select product type".translate(context: context),
           context,
         );
         return false;
-      } else if (addProvider!.productType == 'simple_product') {
-        if (addProvider!.simpleProductPriceController.text.isEmpty) {
-          setSnackbar(
-            "Please enter product price".translate(context: context),
-            context,
-          );
-          return false;
-        } else if (addProvider!.simpleProductPriceController.text.isNotEmpty &&
-            addProvider!.simpleProductSpecialPriceController.text.isNotEmpty &&
-            double.parse(
-                    addProvider!.simpleProductSpecialPriceController.text) >
-                double.parse(addProvider!.simpleProductPriceController.text)) {
-          setSnackbar(
-            "Special price can not greater than price"
-                .translate(context: context),
-            context,
-          );
-          return false;
-        } else if (addProvider!.isStockSelected != null &&
-            addProvider!.isStockSelected == true) {
-          if (addProvider!.simpleproductSKU == null ||
-              addProvider!.simpleproductTotalStock == null) {
-            setSnackbar(
-              "Please enter stock details".translate(context: context),
-              context,
-            );
-            return false;
-          }
-          return true;
-        }
-        return true;
-      } else if (addProvider!.productType == 'variable_product') {
-        for (int i = 0; i < addProvider!.variationList.length; i++) {
-          if (addProvider!.variationList[i].price == null ||
-              addProvider!.variationList[i].price!.isEmpty) {
-            setSnackbar(
-              "Please enter price details".translate(context: context),
-              context,
-            );
-            return false;
-          }
-        }
-        if (addProvider!.isStockSelected != null &&
-            addProvider!.isStockSelected == true) {
-          if (addProvider!.variantStockLevelType == "product_level" &&
-              (addProvider!.variantproductSKU == null ||
-                  addProvider!.variantproductTotalStock == null)) {
-            setSnackbar(
-              "Please enter stock details".translate(context: context),
-              context,
-            );
-            return false;
-          }
-
-          if (addProvider!.variantStockLevelType == "variable_level") {
-            for (int i = 0; i < addProvider!.variationList.length; i++) {
-              if (addProvider!.variationList[i].sku == null ||
-                  addProvider!.variationList[i].sku!.isEmpty ||
-                  addProvider!.variationList[i].stock == null ||
-                  addProvider!.variationList[i].stock!.isEmpty) {
-                setSnackbar(
-                  "Please enter stock details".translate(context: context),
-                  context,
-                );
-                return false;
-              }
-            }
-            return true;
-          }
-          return true;
-        }
       }
+      // else if (addProvider!.productType == 'simple_product') {
+      //   if (addProvider!.simpleProductPriceController.text.isEmpty) {
+      //     setSnackbar(
+      //       "Please enter product price".translate(context: context),
+      //       context,
+      //     );
+      //     return false;
+      //   } else if (addProvider!.simpleProductPriceController.text.isNotEmpty &&
+      //       addProvider!.simpleProductSpecialPriceController.text.isNotEmpty &&
+      //       double.parse(
+      //             addProvider!.simpleProductSpecialPriceController.text,
+      //           ) >
+      //           double.parse(addProvider!.simpleProductPriceController.text)) {
+      //     setSnackbar(
+      //       "Special price can not greater than price".translate(
+      //         context: context,
+      //       ),
+      //       context,
+      //     );
+      //     return false;
+      //   }
+      //   else if (addProvider!.isStockSelected != null &&
+      //       addProvider!.isStockSelected == true) {
+      //     if (addProvider!.simpleproductSKU == null ||
+      //         addProvider!.simpleproductTotalStock == null) {
+      //       setSnackbar(
+      //         "Please enter stock details".translate(context: context),
+      //         context,
+      //       );
+      //       return false;
+      //     }
+      //     return true;
+      //   }
+      //   return true;
+      // } else if (addProvider!.productType == 'variable_product') {
+      //   for (int i = 0; i < addProvider!.variationList.length; i++) {
+      //     if (addProvider!.variationList[i].price == null ||
+      //         addProvider!.variationList[i].price!.isEmpty) {
+      //       setSnackbar(
+      //         "Please enter price details".translate(context: context),
+      //         context,
+      //       );
+      //       return false;
+      //     }
+      //   }
+      //   if (addProvider!.isStockSelected != null &&
+      //       addProvider!.isStockSelected == true) {
+      //     if (addProvider!.variantStockLevelType == "product_level" &&
+      //         (addProvider!.variantproductSKU == null ||
+      //             addProvider!.variantproductTotalStock == null)) {
+      //       setSnackbar(
+      //         "Please enter stock details".translate(context: context),
+      //         context,
+      //       );
+      //       return false;
+      //     }
+
+      //     if (addProvider!.variantStockLevelType == "variable_level") {
+      //       for (int i = 0; i < addProvider!.variationList.length; i++) {
+      //         if (addProvider!.variationList[i].sku == null ||
+      //             addProvider!.variationList[i].sku!.isEmpty ||
+      //             addProvider!.variationList[i].stock == null ||
+      //             addProvider!.variationList[i].stock!.isEmpty) {
+      //           setSnackbar(
+      //             "Please enter stock details".translate(context: context),
+      //             context,
+      //           );
+      //           return false;
+      //         }
+      //       }
+      //       return true;
+      //     }
+      //     return true;
+      //   }
+      // }
       return true;
     }
     return false;
@@ -749,17 +744,14 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
                     if (addProvider!.currentPage == 1) {
                       Navigator.of(context).pop();
                     } else {
-                      addProvider!
-                          .setCurrentPageValue(addProvider!.currentPage - 1);
+                      addProvider!.setCurrentPageValue(
+                        addProvider!.currentPage - 1,
+                      );
                       setState(() {});
                     }
                   },
                   child: const Center(
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: white,
-                      size: 25,
-                    ),
+                    child: Icon(Icons.arrow_back, color: white, size: 25),
                   ),
                 ),
               );
@@ -778,11 +770,8 @@ class _AddProductState extends State<AddProduct> with TickerProviderStateMixin {
               ),
               SizedBox(width: width * 0.1),
               Text(
-                "${"Step".translate(context: context)} ${addProvider!.currentPage} ${"of".translate(context: context)} 4",
-                style: const TextStyle(
-                  color: white,
-                  fontSize: textFontSize14,
-                ),
+                "${"Step".translate(context: context)} ${addProvider!.currentPage} ${"of".translate(context: context)} 3",
+                style: const TextStyle(color: white, fontSize: textFontSize14),
               ),
             ],
           ),

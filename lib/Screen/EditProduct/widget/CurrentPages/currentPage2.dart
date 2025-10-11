@@ -6,10 +6,7 @@ import 'package:sellermultivendor/Screen/EditProduct/widget/getCommonSwitch.dart
 import 'package:sellermultivendor/Screen/EditProduct/widget/getIconSelectionDesingWidget.dart';
 import '../../EditProduct.dart';
 
-currentPage2(
-  BuildContext context,
-  Function setStateNow,
-) {
+currentPage2(BuildContext context, Function setStateNow) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -17,16 +14,11 @@ currentPage2(
           ? Column(
               children: [
                 getPrimaryCommanText(
-                    "Total Allowed Quantity".translate(context: context), true),
-                getCommanSizedBox(),
-                getCommanInputTextField(
-                  " ",
-                  4,
-                  0.06,
-                  1,
-                  3,
-                  context,
+                  "Total Allowed Quantity".translate(context: context),
+                  true,
                 ),
+                getCommanSizedBox(),
+                getCommanInputTextField(" ", 4, 0.06, 1, 3, context),
               ],
             )
           : Container(),
@@ -37,16 +29,11 @@ currentPage2(
           ? Column(
               children: [
                 getPrimaryCommanText(
-                    "Minimum Order Quantity".translate(context: context), true),
-                getCommanSizedBox(),
-                getCommanInputTextField(
-                  " ",
-                  5,
-                  0.06,
-                  1,
-                  3,
-                  context,
+                  "Minimum Order Quantity".translate(context: context),
+                  true,
                 ),
+                getCommanSizedBox(),
+                getCommanInputTextField(" ", 5, 0.06, 1, 3, context),
               ],
             )
           : Container(),
@@ -57,16 +44,11 @@ currentPage2(
           ? Column(
               children: [
                 getPrimaryCommanText(
-                    "Quantity Step Size".translate(context: context), true),
-                getCommanSizedBox(),
-                getCommanInputTextField(
-                  " ",
-                  6,
-                  0.06,
-                  1,
-                  3,
-                  context,
+                  "Quantity Step Size".translate(context: context),
+                  true,
                 ),
+                getCommanSizedBox(),
+                getCommanInputTextField(" ", 6, 0.06, 1, 3, context),
               ],
             )
           : Container(),
@@ -77,16 +59,11 @@ currentPage2(
           ? Column(
               children: [
                 getPrimaryCommanText(
-                    "Warranty Period".translate(context: context), true),
-                getCommanSizedBox(),
-                getCommanInputTextField(
-                  " ",
-                  7,
-                  0.06,
-                  1,
-                  2,
-                  context,
+                  "Warranty Period".translate(context: context),
+                  true,
                 ),
+                getCommanSizedBox(),
+                getCommanInputTextField(" ", 7, 0.06, 1, 2, context),
               ],
             )
           : Container(),
@@ -97,16 +74,11 @@ currentPage2(
           ? Column(
               children: [
                 getPrimaryCommanText(
-                    "Guarantee Period".translate(context: context), true),
-                getCommanSizedBox(),
-                getCommanInputTextField(
-                  " ",
-                  8,
-                  0.06,
-                  1,
-                  2,
-                  context,
+                  "Guarantee Period".translate(context: context),
+                  true,
                 ),
+                getCommanSizedBox(),
+                getCommanInputTextField(" ", 8, 0.06, 1, 2, context),
               ],
             )
           : Container(),
@@ -117,7 +89,9 @@ currentPage2(
           ? Column(
               children: [
                 getPrimaryCommanText(
-                    "Deliverable Type".translate(context: context), true),
+                  "Deliverable Type".translate(context: context),
+                  true,
+                ),
                 getCommanSizedBox(),
                 getIconSelectionDesing(
                   "(ex, all, include)".translate(context: context),
@@ -130,9 +104,9 @@ currentPage2(
           : Container(),
       editProvider!.currentSellectedProductIsPysical
           ? editProvider!.deliverabletypeValue == "2" ||
-                  editProvider!.deliverabletypeValue == "3"
-              ? getCommanSizedBox()
-              : Container()
+                    editProvider!.deliverabletypeValue == "3"
+                ? getCommanSizedBox()
+                : Container()
           : Container(),
       editProvider!.deliverabletypeValue == "2" ||
               editProvider!.deliverabletypeValue == "3"
@@ -140,7 +114,8 @@ currentPage2(
               AppSettingsRepository.appSettings.isCityWiseDeliveribility
                   ? "SELECT_CITY".translate(context: context)
                   : "Select ZipCode".translate(context: context),
-              false)
+              false,
+            )
           : Container(),
       editProvider!.deliverabletypeValue == "2" ||
               editProvider!.deliverabletypeValue == "3"
@@ -157,36 +132,36 @@ currentPage2(
               setStateNow,
             )
           : Container(),
-      getCommanSizedBox(),
-      getPrimaryCommanText(
-          "selected category".translate(context: context), false),
-      getCommanSizedBox(),
-      getIconSelectionDesing(
-        "not Selected Yet!(ex. vegetable, Fashion)".translate(context: context),
-        5,
-        context,
-        setStateNow,
-      ),
-      getCommanSizedBox(),
-      getPrimaryCommanText("Select Brand".translate(context: context), false),
-      getCommanSizedBox(),
-      getIconSelectionDesing(
-        "not Selected Yet!(ex. TaTa, Apple, MicroSoft)"
-            .translate(context: context),
-        13,
-        context,
-        setStateNow,
-      ),
-      getCommanSizedBox(),
-      getPrimaryCommanText(
-          "Select PickUp Location".translate(context: context), false),
-      getCommanSizedBox(),
-      getIconSelectionDesing(
-        "PickUp Location Not Selected Yet".translate(context: context),
-        16,
-        context,
-        setStateNow,
-      ),
+      // getCommanSizedBox(),
+      // getPrimaryCommanText(
+      //     "selected category".translate(context: context), false),
+      // getCommanSizedBox(),
+      // getIconSelectionDesing(
+      //   "not Selected Yet!(ex. vegetable, Fashion)".translate(context: context),
+      //   5,
+      //   context,
+      //   setStateNow,
+      // ),
+      // getCommanSizedBox(),
+      // getPrimaryCommanText("Select Brand".translate(context: context), false),
+      // getCommanSizedBox(),
+      // getIconSelectionDesing(
+      //   "not Selected Yet!(ex. TaTa, Apple, MicroSoft)"
+      //       .translate(context: context),
+      //   13,
+      //   context,
+      //   setStateNow,
+      // ),
+      // getCommanSizedBox(),
+      // getPrimaryCommanText(
+      //     "Select PickUp Location".translate(context: context), false),
+      // getCommanSizedBox(),
+      // getIconSelectionDesing(
+      //   "PickUp Location Not Selected Yet".translate(context: context),
+      //   16,
+      //   context,
+      //   setStateNow,
+      // ),
       editProvider!.currentSellectedProductIsPysical
           ? getCommanSizedBox()
           : Container(),
@@ -194,16 +169,11 @@ currentPage2(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           getPrimaryCommanText(
-              "LOW_STOCK_LIMIT".translate(context: context), false),
-          getCommanSizedBox(),
-          getCommanInputTextField(
-            " ",
-            26,
-            0.06,
-            1,
-            3,
-            context,
+            "LOW_STOCK_LIMIT".translate(context: context),
+            false,
           ),
+          getCommanSizedBox(),
+          getCommanInputTextField(" ", 26, 0.06, 1, 3, context),
         ],
       ),
       editProvider!.currentSellectedProductIsPysical
@@ -212,8 +182,9 @@ currentPage2(
                 Expanded(
                   flex: 2,
                   child: getPrimaryCommanText(
-                      "Is Product Returnable?".translate(context: context),
-                      true),
+                    "Is Product Returnable?".translate(context: context),
+                    true,
+                  ),
                 ),
                 getCommanSwitch(1, setStateNow),
               ],
@@ -228,8 +199,9 @@ currentPage2(
                 Expanded(
                   flex: 2,
                   child: getPrimaryCommanText(
-                      "Is Product COD Allowed?".translate(context: context),
-                      true),
+                    "Is Product COD Allowed?".translate(context: context),
+                    true,
+                  ),
                 ),
                 getCommanSwitch(2, setStateNow),
               ],
@@ -241,7 +213,9 @@ currentPage2(
           Expanded(
             flex: 2,
             child: getPrimaryCommanText(
-                "Tax included in price?".translate(context: context), true),
+              "Tax included in price?".translate(context: context),
+              true,
+            ),
           ),
           getCommanSwitch(3, setStateNow),
         ],
@@ -255,8 +229,9 @@ currentPage2(
                 Expanded(
                   flex: 2,
                   child: getPrimaryCommanText(
-                      "Is Product Cancelable?".translate(context: context),
-                      true),
+                    "Is Product Cancelable?".translate(context: context),
+                    true,
+                  ),
                 ),
                 Expanded(
                   flex: 1,
@@ -277,8 +252,9 @@ currentPage2(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 getPrimaryCommanText(
-                    "Is Attachment Required ?".translate(context: context),
-                    true),
+                  "Is Attachment Required ?".translate(context: context),
+                  true,
+                ),
                 getCommanSwitch(6, setStateNow),
               ],
             )

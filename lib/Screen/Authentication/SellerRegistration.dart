@@ -935,263 +935,263 @@ class _SellerRegisterState extends State<SellerRegister>
     );
   }
 
-  // Widget setStoreCategories() {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(top: 15.0),
-  //     child: Container(
-  //       width: MediaQuery.of(context).size.width * 0.90,
-  //       decoration: BoxDecoration(
-  //         border: Border.all(color: black.withValues(alpha: 0.1)),
-  //         borderRadius: BorderRadius.circular(circularBorderRadius7),
-  //         color: lightWhite.withValues(alpha: 0.5),
-  //       ),
-  //       child: ListTile(
-  //         title: selectedCategoriesList.isNotEmpty
-  //             ? Text(
-  //                 selectedCategoriesList.map((e) => e.name).toList().join(', '),
-  //               )
-  //             : Text(
-  //                 'Select Category'.translate(context: context),
-  //                 style: TextStyle(
-  //                   fontSize: 13,
-  //                   color: black.withValues(alpha: 0.4),
-  //                 ),
-  //               ),
-  //         trailing: const Icon(Icons.chevron_right),
-  //         // Prevent text entry
-  //         onTap: () async {
-  //           final categoriesProvider = Provider.of<CategoryProvider>(
-  //             context,
-  //             listen: false,
-  //           );
-  //           if (categoriesProvider.searchString.isNotEmpty) {
-  //             categoriesProvider.searchString = "";
-  //             context.read<CategoryProvider>().setCategoryList(isRefresh: true);
-  //           } else if (categoriesProvider.categoryList.isEmpty) {
-  //             context.read<CategoryProvider>().setCategoryList(
-  //               isRefresh: false,
-  //             );
-  //           }
-  //           // await categoriesDialog(context); // Open the bottom sheet
-  //           await showDialog(
-  //             context: context,
-  //             builder: (BuildContext buildContext) {
-  //               return AlertDialog(
-  //                 scrollable: true,
-  //                 content: Consumer<CategoryProvider>(
-  //                   builder: (context, data, child) {
-  //                     return Column(
-  //                       crossAxisAlignment: CrossAxisAlignment.start,
-  //                       mainAxisSize: MainAxisSize.min,
-  //                       children: [
-  //                         Text(
-  //                           'Select Category'.translate(context: context),
-  //                           style: Theme.of(
-  //                             this.context,
-  //                           ).textTheme.titleMedium!.copyWith(color: primary),
-  //                         ),
-  //                         const Divider(color: lightBlack),
-  //                         Flexible(
-  //                           child: SizedBox(
-  //                             height: MediaQuery.of(context).size.height * 0.5,
-  //                             child: SingleChildScrollView(
-  //                               // physics: AlwaysScrollableScrollPhysics(),
-  //                               controller: controller1,
-  //                               child: Column(
-  //                                 mainAxisSize: MainAxisSize.min,
-  //                                 children: [
-  //                                   Container(
-  //                                     decoration: const BoxDecoration(
-  //                                       borderRadius: BorderRadius.all(
-  //                                         Radius.circular(
-  //                                           circularBorderRadius5,
-  //                                         ),
-  //                                       ),
-  //                                       boxShadow: [
-  //                                         BoxShadow(
-  //                                           color: blarColor,
-  //                                           offset: Offset(0, 0),
-  //                                           blurRadius: 4,
-  //                                           spreadRadius: 0,
-  //                                         ),
-  //                                       ],
-  //                                       color: white,
-  //                                     ),
-  //                                     child: TextField(
-  //                                       decoration: InputDecoration(
-  //                                         filled: true,
-  //                                         isDense: true,
-  //                                         fillColor: white,
-  //                                         prefixIconConstraints:
-  //                                             const BoxConstraints(
-  //                                               minWidth: 40,
-  //                                               maxHeight: 20,
-  //                                             ),
-  //                                         contentPadding:
-  //                                             const EdgeInsets.symmetric(
-  //                                               horizontal: 10,
-  //                                               vertical: 10,
-  //                                             ),
-  //                                         prefixIcon: const Icon(Icons.search),
-  //                                         hintText: "SEARCH".translate(
-  //                                           context: context,
-  //                                         ),
-  //                                         hintStyle: TextStyle(
-  //                                           color: black.withValues(alpha: 0.3),
-  //                                           fontWeight: FontWeight.normal,
-  //                                         ),
-  //                                         border: const OutlineInputBorder(
-  //                                           borderSide: BorderSide(
-  //                                             width: 0,
-  //                                             style: BorderStyle.none,
-  //                                           ),
-  //                                         ),
-  //                                       ),
-  //                                       onChanged: (value) {
-  //                                         if (_debounce1?.isActive ?? false) {
-  //                                           _debounce1?.cancel();
-  //                                         }
-  //                                         data.searchString = value;
-  //                                         //auto search after 1 second of typing
-  //                                         _debounce1 = Timer(
-  //                                           const Duration(milliseconds: 1000),
-  //                                           () {
-  //                                             context
-  //                                                 .read<CategoryProvider>()
-  //                                                 .setCategoryList();
-  //                                           },
-  //                                         );
-  //                                       },
-  //                                     ),
-  //                                   ),
-  //                                   Column(
-  //                                     children: [
-  //                                       StatefulBuilder(
-  //                                         builder: (context, setstater) {
-  //                                           print(
-  //                                             "category list length--->${data.categoryList.length}}",
-  //                                           );
-  //                                           return (data
-  //                                                   .categoryList
-  //                                                   .isNotEmpty)
-  //                                               ? Column(
-  //                                                   crossAxisAlignment:
-  //                                                       CrossAxisAlignment
-  //                                                           .start,
-  //                                                   children: () {
-  //                                                     return data.categoryList
-  //                                                         .asMap()
-  //                                                         .map(
-  //                                                           (
-  //                                                             index,
-  //                                                             element,
-  //                                                           ) => MapEntry(
-  //                                                             index,
-  //                                                             CheckboxListTile(
-  //                                                               title: Text(
-  //                                                                 element.name!,
-  //                                                               ),
-  //                                                               value: selectedCategoriesList.any(
-  //                                                                 (selected) =>
-  //                                                                     selected
-  //                                                                         .id ==
-  //                                                                     element
-  //                                                                         .id,
-  //                                                               ),
-  //                                                               onChanged: (isSelected) {
-  //                                                                 if (isSelected ==
-  //                                                                     true) {
-  //                                                                   if (!selectedCategoriesList.any(
-  //                                                                     (
-  //                                                                       selected,
-  //                                                                     ) =>
-  //                                                                         selected
-  //                                                                             .id ==
-  //                                                                         element
-  //                                                                             .id,
-  //                                                                   )) {
-  //                                                                     selectedCategoriesList
-  //                                                                         .add(
-  //                                                                           element,
-  //                                                                         );
-  //                                                                   }
-  //                                                                 } else {
-  //                                                                   selectedCategoriesList.removeWhere(
-  //                                                                     (
-  //                                                                       selected,
-  //                                                                     ) =>
-  //                                                                         selected
-  //                                                                             .id ==
-  //                                                                         element
-  //                                                                             .id,
-  //                                                                   );
-  //                                                                 }
-  //                                                                 setState(
-  //                                                                   () {},
-  //                                                                 ); // Update UI
-  //                                                                 setstater(
-  //                                                                   () {},
-  //                                                                 ); // Update dialog state
-  //                                                               },
-  //                                                             ),
-  //                                                           ),
-  //                                                         )
-  //                                                         .values
-  //                                                         .toList();
-  //                                                   }(),
-  //                                                 )
-  //                                               : Padding(
-  //                                                   padding:
-  //                                                       const EdgeInsets.symmetric(
-  //                                                         vertical: 20.0,
-  //                                                       ),
-  //                                                   child: Text(
-  //                                                     'CATEGORY_IS_NOT_AVAIL_LBL'
-  //                                                         .translate(
-  //                                                           context: context,
-  //                                                         ),
-  //                                                   ),
-  //                                                 );
-  //                                         },
-  //                                       ),
-  //                                       DesignConfiguration.showCircularProgress(
-  //                                         false,
-  //                                         primary,
-  //                                       ),
-  //                                     ],
-  //                                   ),
-  //                                 ],
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                         Align(
-  //                           alignment: AlignmentDirectional.bottomEnd,
-  //                           child: TextButton(
-  //                             onPressed: () {
-  //                               Navigator.of(context).pop();
-  //                             },
-  //                             child: Text(
-  //                               'DONE'.translate(context: context),
-  //                               style: Theme.of(this.context)
-  //                                   .textTheme
-  //                                   .titleMedium!
-  //                                   .copyWith(color: primary),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     );
-  //                   },
-  //                 ),
-  //               );
-  //             },
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget setStoreCategories() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15.0),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.90,
+        decoration: BoxDecoration(
+          border: Border.all(color: black.withValues(alpha: 0.1)),
+          borderRadius: BorderRadius.circular(circularBorderRadius7),
+          color: lightWhite.withValues(alpha: 0.5),
+        ),
+        child: ListTile(
+          title: selectedCategoriesList.isNotEmpty
+              ? Text(
+                  selectedCategoriesList.map((e) => e.name).toList().join(', '),
+                )
+              : Text(
+                  'Select Category'.translate(context: context),
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: black.withValues(alpha: 0.4),
+                  ),
+                ),
+          trailing: const Icon(Icons.chevron_right),
+          // Prevent text entry
+          onTap: () async {
+            final categoriesProvider = Provider.of<CategoryProvider>(
+              context,
+              listen: false,
+            );
+            if (categoriesProvider.searchString.isNotEmpty) {
+              categoriesProvider.searchString = "";
+              context.read<CategoryProvider>().setCategoryList(isRefresh: true);
+            } else if (categoriesProvider.categoryList.isEmpty) {
+              context.read<CategoryProvider>().setCategoryList(
+                isRefresh: false,
+              );
+            }
+            // await categoriesDialog(context); // Open the bottom sheet
+            await showDialog(
+              context: context,
+              builder: (BuildContext buildContext) {
+                return AlertDialog(
+                  scrollable: true,
+                  content: Consumer<CategoryProvider>(
+                    builder: (context, data, child) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Select Category'.translate(context: context),
+                            style: Theme.of(
+                              this.context,
+                            ).textTheme.titleMedium!.copyWith(color: primary),
+                          ),
+                          const Divider(color: lightBlack),
+                          Flexible(
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: SingleChildScrollView(
+                                // physics: AlwaysScrollableScrollPhysics(),
+                                controller: controller1,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            circularBorderRadius5,
+                                          ),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: blarColor,
+                                            offset: Offset(0, 0),
+                                            blurRadius: 4,
+                                            spreadRadius: 0,
+                                          ),
+                                        ],
+                                        color: white,
+                                      ),
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          isDense: true,
+                                          fillColor: white,
+                                          prefixIconConstraints:
+                                              const BoxConstraints(
+                                                minWidth: 40,
+                                                maxHeight: 20,
+                                              ),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                                vertical: 10,
+                                              ),
+                                          prefixIcon: const Icon(Icons.search),
+                                          hintText: "SEARCH".translate(
+                                            context: context,
+                                          ),
+                                          hintStyle: TextStyle(
+                                            color: black.withValues(alpha: 0.3),
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                          border: const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              width: 0,
+                                              style: BorderStyle.none,
+                                            ),
+                                          ),
+                                        ),
+                                        onChanged: (value) {
+                                          if (_debounce1?.isActive ?? false) {
+                                            _debounce1?.cancel();
+                                          }
+                                          data.searchString = value;
+                                          //auto search after 1 second of typing
+                                          _debounce1 = Timer(
+                                            const Duration(milliseconds: 1000),
+                                            () {
+                                              context
+                                                  .read<CategoryProvider>()
+                                                  .setCategoryList();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        StatefulBuilder(
+                                          builder: (context, setstater) {
+                                            print(
+                                              "category list length--->${data.categoryList.length}}",
+                                            );
+                                            return (data
+                                                    .categoryList
+                                                    .isNotEmpty)
+                                                ? Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: () {
+                                                      return data.categoryList
+                                                          .asMap()
+                                                          .map(
+                                                            (
+                                                              index,
+                                                              element,
+                                                            ) => MapEntry(
+                                                              index,
+                                                              CheckboxListTile(
+                                                                title: Text(
+                                                                  element.name!,
+                                                                ),
+                                                                value: selectedCategoriesList.any(
+                                                                  (selected) =>
+                                                                      selected
+                                                                          .id ==
+                                                                      element
+                                                                          .id,
+                                                                ),
+                                                                onChanged: (isSelected) {
+                                                                  if (isSelected ==
+                                                                      true) {
+                                                                    if (!selectedCategoriesList.any(
+                                                                      (
+                                                                        selected,
+                                                                      ) =>
+                                                                          selected
+                                                                              .id ==
+                                                                          element
+                                                                              .id,
+                                                                    )) {
+                                                                      selectedCategoriesList
+                                                                          .add(
+                                                                            element,
+                                                                          );
+                                                                    }
+                                                                  } else {
+                                                                    selectedCategoriesList.removeWhere(
+                                                                      (
+                                                                        selected,
+                                                                      ) =>
+                                                                          selected
+                                                                              .id ==
+                                                                          element
+                                                                              .id,
+                                                                    );
+                                                                  }
+                                                                  setState(
+                                                                    () {},
+                                                                  ); // Update UI
+                                                                  setstater(
+                                                                    () {},
+                                                                  ); // Update dialog state
+                                                                },
+                                                              ),
+                                                            ),
+                                                          )
+                                                          .values
+                                                          .toList();
+                                                    }(),
+                                                  )
+                                                : Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          vertical: 20.0,
+                                                        ),
+                                                    child: Text(
+                                                      'CATEGORY_IS_NOT_AVAIL_LBL'
+                                                          .translate(
+                                                            context: context,
+                                                          ),
+                                                    ),
+                                                  );
+                                          },
+                                        ),
+                                        DesignConfiguration.showCircularProgress(
+                                          false,
+                                          primary,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional.bottomEnd,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                'DONE'.translate(context: context),
+                                style: Theme.of(this.context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(color: primary),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
 
   // Widget getZipCodeOrCityType() {
   //   return Padding(
