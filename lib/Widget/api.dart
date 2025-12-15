@@ -23,10 +23,12 @@ final Uri getCitiesApi = Uri.parse('${baseUrl}get_cities');
 final Uri getAreasByCityIdApi = Uri.parse('${baseUrl}get_areas_by_city_id');
 final Uri getZipcodesApi = Uri.parse('${baseUrl}get_zipcodes');
 final Uri getTaxesApi = Uri.parse('${baseUrl}get_taxes');
-final Uri sendWithDrawalRequestApi =
-    Uri.parse('${baseUrl}send_withdrawal_request');
-final Uri getWithDrawalRequestApi =
-    Uri.parse('${baseUrl}get_withdrawal_request');
+final Uri sendWithDrawalRequestApi = Uri.parse(
+  '${baseUrl}send_withdrawal_request',
+);
+final Uri getWithDrawalRequestApi = Uri.parse(
+  '${baseUrl}get_withdrawal_request',
+);
 final Uri getAttributeSetApi = Uri.parse('${baseUrl}get_attribute_set');
 final Uri getAttributesApi = Uri.parse('${baseUrl}get_attributes');
 final Uri getAttributrValuesApi = Uri.parse('${baseUrl}get_attribute_values');
@@ -52,38 +54,48 @@ final Uri editProductFaqApi = Uri.parse("${baseUrl}edit_product_faq");
 final Uri deleteSellerApi = Uri.parse("${baseUrl}delete_seller");
 final Uri getBrandsDataApi = Uri.parse("${baseUrl}get_brands_data");
 final Uri manageStockApi = Uri.parse("${baseUrl}manage_stock");
-final Uri sendDigitalProductMailApi =
-    Uri.parse("${baseUrl}send_digital_product_mail");
+final Uri sendDigitalProductMailApi = Uri.parse(
+  "${baseUrl}send_digital_product_mail",
+);
 final Uri getPickUpLocationApi = Uri.parse("${baseUrl}get_pickup_locations");
 final Uri addPickUpLocationApi = Uri.parse("${baseUrl}add_pickup_location");
-final Uri createShipRocketOrderApi =
-    Uri.parse("${baseUrl}create_shiprocket_order");
+final Uri createShipRocketOrderApi = Uri.parse(
+  "${baseUrl}create_shiprocket_order",
+);
 final Uri generateAWBApi = Uri.parse("${baseUrl}generate_awb");
 final Uri sendPickUpRequestApi = Uri.parse("${baseUrl}send_pickup_request");
-final Uri cancelShipRocketOrderApi =
-    Uri.parse("${baseUrl}cancel_shiprocket_order");
-final Uri updateShipRocketOrderStatusApi =
-    Uri.parse("${baseUrl}update_shiprocket_order_status");
+final Uri cancelShipRocketOrderApi = Uri.parse(
+  "${baseUrl}cancel_shiprocket_order",
+);
+final Uri updateShipRocketOrderStatusApi = Uri.parse(
+  "${baseUrl}update_shiprocket_order_status",
+);
 final Uri generateLabelApi = Uri.parse("${baseUrl}generate_label");
 final Uri downloadLabelApi = Uri.parse("${baseUrl}download_label");
 final Uri generateInvoiceApi = Uri.parse("${baseUrl}generate_invoice");
 final Uri downloadInvoiceApi = Uri.parse("${baseUrl}download_invoice");
-final Uri shipRocketOrderTrackingApi =
-    Uri.parse("${baseUrl}shiprocket_order_tracking");
+final Uri shipRocketOrderTrackingApi = Uri.parse(
+  "${baseUrl}shiprocket_order_tracking",
+);
 
 //Consignment APIs
-final Uri createConsignmentApi =
-    Uri.parse("${baseUrl}create_order_consignment");
+final Uri createConsignmentApi = Uri.parse(
+  "${baseUrl}create_order_consignment",
+);
 final Uri getConsignmentApi = Uri.parse("${baseUrl}get_all_consignments");
-final Uri updateConsignmentStatusApi =
-    Uri.parse("${baseUrl}update_consignment_order_status");
+final Uri updateConsignmentStatusApi = Uri.parse(
+  "${baseUrl}update_consignment_order_status",
+);
 
-final Uri digitalOrderStatusUpdate =
-    Uri.parse("${baseUrl}digital_order_status_update");
-final Uri deleteOrderConsignment =
-    Uri.parse("${baseUrl}delete_order_consignment");
-final Uri fetchConsignmentInvoiceApi =
-    Uri.parse("${baseUrl}get_consignment_invoice_html");
+final Uri digitalOrderStatusUpdate = Uri.parse(
+  "${baseUrl}digital_order_status_update",
+);
+final Uri deleteOrderConsignment = Uri.parse(
+  "${baseUrl}delete_order_consignment",
+);
+final Uri fetchConsignmentInvoiceApi = Uri.parse(
+  "${baseUrl}get_consignment_invoice_html",
+);
 //
 //Seller to user and group chat urls
 final Uri getPersonalChatListApi = Uri.parse('${chatBaseUrl}get_chat_history');
@@ -98,3 +110,36 @@ final Uri deleteGroupApi = Uri.parse("${chatBaseUrl}delete_group");
 final Uri makeMeOnlineApi = Uri.parse("${chatBaseUrl}make_me_online");
 
 //
+// 🔹 Advertising Packages API Endpoints
+// final Uri getAdvertisingPackagesApi = Uri.parse(
+//   "${baseUrl}get_advertising_packages",
+// );
+
+// final Uri buyAdvertisingPackageApi = Uri.parse(
+//   "${baseUrl}buy_advertising_package",
+// );
+
+// final Uri getUserPackagesApi = Uri.parse("${baseUrl}get_user_packages");
+
+// final Uri checkPackageStatusApi = Uri.parse("${baseUrl}check_package_status");
+// For Seller App - based on your route structure
+// final Uri getAdvertisingPackagesApi = Uri.parse("${baseUrl}ad-packages");
+final Uri getAdvertisingPackagesApi = Uri.parse(
+  "${baseUrl}get_advertising_packages",
+);
+
+final Uri buyAdvertisingPackageApi = Uri.parse(
+  "${baseUrl}buy_advertising_package",
+);
+
+final Uri getUserPackagesApi = Uri.parse(
+  "${baseUrl}get_user_packages",
+);
+
+final Uri checkPackageStatusApi = Uri.parse(
+  "${baseUrl}check_package_status",
+);
+
+final Uri verifyChapaPaymentApi = Uri.parse(
+  "${baseUrl}verify_chapa_payment",
+);

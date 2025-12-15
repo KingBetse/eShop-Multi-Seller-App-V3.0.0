@@ -6,7 +6,10 @@ class AppConstants {
   static const String iosPackage = 'eshop.seller.multivendor';
   // static const String title = 'eShop Multi-Vendor - Seller';
   //please add your panel's API base URL here (you can find from settings->client APIs)
-  static const String baseUrl = 'https://zeyoet.com/seller/app/v1/api/'; //dev
+  static const String baseUrl = 'https://zeyoet.com/seller/app/v1/api/';
+  //
+  // static const String baseUrl = 'http://code.test/seller/app/v1/api';
+
   static const String chatBaseUrl = 'PLACE_YOUR_CHAT_BASE_URL_HERE'; //dev
   static const String defaultLanguageCode = 'en';
   static const String defaultLanguageName = "English";

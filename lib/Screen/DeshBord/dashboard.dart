@@ -8,8 +8,11 @@ import 'package:sellermultivendor/Helper/assetsConstant.dart';
 import 'package:sellermultivendor/Helper/extensions/extensions.dart';
 import 'package:sellermultivendor/Model/message.dart';
 import 'package:sellermultivendor/Repository/NotificationRepository.dart';
+import 'package:sellermultivendor/Screen/AdvertisingPackages/AdvertisingPackagesScreen.dart';
 import 'package:sellermultivendor/Screen/DeshBord/profileagain.dart';
 import 'package:sellermultivendor/Screen/OrderList/orders_screen.dart';
+import 'package:sellermultivendor/Provider/settingProvider.dart';
+
 import 'package:sellermultivendor/Widget/snackbar.dart';
 import 'package:sellermultivendor/cubits/personalConverstationsCubit.dart';
 import '../../Helper/Color.dart';
@@ -35,9 +38,9 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
     fragments = [
       const Home(),
       const OrdersScreen(),
-      const ProductList(
-        flag: "",
-        fromNavbar: true,
+      const ProductList(flag: "", fromNavbar: true),
+      AdvertisingPackagesScreen(
+        userId: (context.read<SettingProvider>().CUR_USERID ?? '0').toInt(),
       ),
       const ProfileAgain(),
     ];
@@ -52,8 +55,9 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       NotificationRepository.getChatNotifications().then((messages) {
         for (var encodedMessage in messages) {
-          final message =
-              Message.fromJson(Map.from(jsonDecode(encodedMessage) ?? {}));
+          final message = Message.fromJson(
+            Map.from(jsonDecode(encodedMessage) ?? {}),
+          );
 
           if (conversationScreenStateKey.currentState?.mounted ?? false) {
             final state = conversationScreenStateKey.currentState!;
@@ -73,9 +77,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
             if (message.type == 'person') {
               context
                   .read<PersonalConverstationsCubit>()
-                  .updateUnreadMessageCounter(
-                    userId: message.fromId!,
-                  );
+                  .updateUnreadMessageCounter(userId: message.fromId!);
             } else {
               // Update group message
             }
@@ -96,7 +98,8 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: _curBottom == 0 &&
+      canPop:
+          _curBottom == 0 &&
           !(currentBackPressTime == null ||
               DateTime.now().difference(currentBackPressTime!) >
                   const Duration(seconds: 2)),
@@ -134,7 +137,7 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
             offset: Offset(0, -3),
             blurRadius: 6,
             spreadRadius: 0,
-          )
+          ),
         ],
         color: white,
       ),
@@ -176,6 +179,17 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
               ),
               label: 'PRODUCTS'.translate(context: context),
             ),
+            // BottomNavigationBarItem(
+            //   icon: SvgPicture.asset(
+            //     DesignConfiguration.setNewSvgPath(Assets.profileInactive),
+            //   ),
+            //   activeIcon: SvgPicture.asset(
+            //     DesignConfiguration.setNewSvgPath(Assets.profileActive),
+            //     height: 25,
+            //   ),
+            //   // label: ''.translate(context: context),
+            //   label: 'Packages',
+            // ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 DesignConfiguration.setNewSvgPath(Assets.profileInactive),
@@ -192,11 +206,9 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
           selectedItemColor: black,
           onTap: (int index) {
             if (mounted) {
-              setState(
-                () {
-                  _curBottom = index;
-                },
-              );
+              setState(() {
+                _curBottom = index;
+              });
             }
           },
           elevation: 25,

@@ -10,7 +10,7 @@ class ApiException implements Exception {
   ApiException(this.errorMessage);
 
   String errorMessage;
-//
+  //
   @override
   String toString() {
     return errorMessage;
@@ -18,17 +18,22 @@ class ApiException implements Exception {
 }
 
 class ApiBaseHelper {
-  Future<void> downloadFile(
-      {required String url,
-      required dio_.CancelToken cancelToken,
-      required String savePath,
-      required Function updateDownloadedPercentage}) async {
+  Future<void> downloadFile({
+    required String url,
+    required dio_.CancelToken cancelToken,
+    required String savePath,
+    required Function updateDownloadedPercentage,
+  }) async {
     try {
       final dio_.Dio dio = dio_.Dio();
-      await dio.download(url, savePath, cancelToken: cancelToken,
-          onReceiveProgress: ((count, total) {
-        updateDownloadedPercentage((count / total) * 100);
-      }));
+      await dio.download(
+        url,
+        savePath,
+        cancelToken: cancelToken,
+        onReceiveProgress: ((count, total) {
+          updateDownloadedPercentage((count / total) * 100);
+        }),
+      );
     } on dio_.DioException catch (e) {
       if (e.type == dio_.DioExceptionType.connectionError) {
         throw ApiException('No Internet connection');
@@ -46,17 +51,16 @@ class ApiBaseHelper {
     try {
       final response = await post(
         url,
-        body: parameter.isNotEmpty ? parameter : null,
-        headers: headers,
-      ).timeout(
-        const Duration(
-          seconds: timeOut,
-        ),
-      );
-      // print("response : ${response.body.toString()}");
+        body: parameter.isNotEmpty ? jsonEncode(parameter) : null, // ✅ FIXED
+        headers: {
+          'Content-Type': 'application/json', // ✅ ensure backend expects JSON
+          ...headers,
+        },
+      ).timeout(const Duration(seconds: timeOut));
 
       print(
-          "Parameter = $parameter, API = $url, responseCode : ${response.statusCode}, header : $headers response : ${response.body.toString()}");
+        "Parameter = $parameter, API = $url, responseCode : ${response.statusCode}, header : $headers response : ${response.body.toString()}",
+      );
       responseJson = _response(response);
     } on SocketException {
       throw ApiException('No Internet connection');
@@ -67,6 +71,38 @@ class ApiBaseHelper {
     }
     return responseJson;
   }
+
+  // Future<dynamic> postAPICall(Uri url, Map parameter) async {
+  //   var responseJson;
+  //   print("parameter : $parameter");
+  //   print("url : $url");
+  //   try {
+  //     final response = await post(
+  //       url,
+  //       body: parameter.isNotEmpty ? parameter : null,
+  //       // headers: headers,
+  //       headers: {
+  //         "Accept": "application/json",
+  //         // ❌ remove or comment out Content-Type if it’s there
+  //         // "Content-Type": "application/json",
+  //         "Authorization": headers["Authorization"] ?? "",
+  //       },
+  //     ).timeout(const Duration(seconds: timeOut));
+  //     // print("response : ${response.body.toString()}");
+
+  //     print(
+  //       "Parameter = $parameter, API = $url, responseCode : ${response.statusCode}, header : $headers response : ${response.body.toString()}",
+  //     );
+  //     responseJson = _response(response);
+  //   } on SocketException {
+  //     throw ApiException('No Internet connection');
+  //   } on TimeoutException {
+  //     throw ApiException('Something went wrong, Server not Responding');
+  //   } on Exception catch (e) {
+  //     throw ApiException('Something Went wrong with ${e.toString()}');
+  //   }
+  //   return responseJson;
+  // }
 
   dynamic _response(Response response) {
     switch (response.statusCode) {
@@ -81,7 +117,8 @@ class ApiBaseHelper {
       case 500:
       default:
         throw FetchDataException(
-            'Error occurred while Communication with Server with StatusCode: ${response.statusCode}');
+          'Error occurred while Communication with Server with StatusCode: ${response.statusCode}',
+        );
     }
   }
 }
@@ -100,7 +137,7 @@ class CustomException implements Exception {
 
 class FetchDataException extends CustomException {
   FetchDataException([message])
-      : super(message, "Error During Communication: ");
+    : super(message, "Error During Communication: ");
 }
 
 class BadRequestException extends CustomException {

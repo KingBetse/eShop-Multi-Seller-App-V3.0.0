@@ -184,6 +184,42 @@ class _SellerRegisterState extends State<SellerRegister>
 
   //==============================================================================
   //============================= For API Call ==================================
+  // Future<void> sellerRegisterAPI() async {
+  //   isNetworkAvail = await isNetworkAvailable();
+  //   if (!isNetworkAvail) return;
+
+  //   try {
+  //     var request = http.MultipartRequest(
+  //       "POST",
+  //       Uri.parse("https://zeyoet.com/seller/app/v1/api/login"),
+  //     );
+
+  //     request.fields['mobile'] = mobile!;
+  //     request.fields['password'] = password!;
+  //     // optional
+  //     // request.fields['fcm_id'] = fcmId ?? "";
+
+  //     print("Login fields: ${request.fields}");
+
+  //     var response = await request.send();
+  //     var responseData = await response.stream.toBytes();
+  //     var responseString = String.fromCharCodes(responseData);
+
+  //     print("Login response: $responseString");
+
+  //     var getdata = json.decode(responseString);
+  //     bool error = getdata["error"];
+  //     String msg = getdata["message"];
+
+  //     if (!error) {
+  //       showMsgDialog(msg, true);
+  //     } else {
+  //       showMsgDialog(msg, false);
+  //     }
+  //   } catch (e) {
+  //     print("Login error: $e");
+  //   }
+  // }
 
   Future<void> sellerRegisterAPI() async {
     isNetworkAvail = await isNetworkAvailable();

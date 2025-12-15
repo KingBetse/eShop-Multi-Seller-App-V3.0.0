@@ -34,7 +34,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="eShop Seller"
+        android:label="Zeyo Seller"
         android:allowBackup="false"
         android:fullBackupOnly="false"
         android:requestLegacyExternalStorage="true"

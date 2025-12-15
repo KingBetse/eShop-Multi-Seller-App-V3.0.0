@@ -10,6 +10,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sellermultivendor/Helper/PushNotificationService.dart';
+import 'package:sellermultivendor/Provider/AdvertisingPackageProvider.dart';
 import 'package:sellermultivendor/Provider/addPickUpLocationProvider.dart';
 import 'package:sellermultivendor/Provider/brandProvider.dart';
 import 'package:sellermultivendor/Provider/cityProvider.dart';
@@ -212,6 +213,11 @@ Future<void> _initializeApp() async {
             create: (_) => PushNotificationProvider(),
             lazy: true,
           ),
+
+          ChangeNotifierProvider<AdvertisingPackageProvider>(
+            create: (_) => AdvertisingPackageProvider(),
+          ), 
+
           BlocProvider(
             create: (_) => PersonalConverstationsCubit(ChatRepository()),
             lazy: true,
