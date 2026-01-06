@@ -23,6 +23,8 @@ import 'package:sellermultivendor/Repository/generateAWBRepository.dart';
 import 'package:sellermultivendor/Repository/hiveRepository.dart';
 import 'package:sellermultivendor/Repository/ordeListRepositry.dart';
 import 'package:sellermultivendor/Repository/sendPickUpRequestRepository.dart';
+import 'package:sellermultivendor/Screen/Authentication/Login.dart';
+import 'package:sellermultivendor/Screen/DeshBord/dashboard.dart';
 import 'package:sellermultivendor/cubits/groupConverstationsCubit.dart';
 import 'package:sellermultivendor/cubits/languageCubit.dart';
 import 'package:sellermultivendor/cubits/loadCountryCodeCubit.dart';
@@ -57,7 +59,21 @@ import 'Provider/stockmanagementProvider.dart';
 import 'Provider/taxProvider.dart';
 import 'Provider/walletProvider.dart';
 import 'Provider/zipcodeProvider.dart';
-import 'Screen/SplashScreen/splashScreen.dart';
+// Remove splash screen import
+// import 'Screen/SplashScreen/splashScreen.dart';
+
+// Import your repositories for settings
+import 'Repository/getSettingRepositry.dart';
+import 'Repository/appSettingsRepository.dart';
+import 'Model/appSettingsModel.dart';
+import 'Widget/sharedPreferances.dart';
+import 'Widget/parameterString.dart';
+
+// Global provider instance
+SettingProvider? globalSettingsProvider;
+
+// Global navigation key
+GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -70,48 +86,71 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  debugProfileBuildsEnabled = true; // Add this
-  // Show splash screen IMMEDIATELY
-  runApp(const SplashLoader());
+  debugProfileBuildsEnabled = true;
 
-  // Then initialize everything in background
-  await _initializeApp();
+  // Set basic UI configuration immediately
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  // Show immediate loading screen
+  runApp(const AppInitializer());
 }
 
-Future<void> _initializeApp() async {
-  try {
-    // Basic UI configuration (fast)
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+// App initializer that handles all setup
+class AppInitializer extends StatefulWidget {
+  const AppInitializer({Key? key}) : super(key: key);
 
-    // Get shared preferences first (relatively fast)
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
+  @override
+  _AppInitializerState createState() => _AppInitializerState();
+}
 
-    // Initialize Firebase
-    if (Firebase.apps.isNotEmpty) {
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-    } else {
-      await Firebase.initializeApp();
-    }
+class _AppInitializerState extends State<AppInitializer> {
+  late Future<Widget> _appFuture;
+  bool _initialized = false;
 
-    // Initialize Hive (can be slower)
-    await Hive.initFlutter();
-    await HiveRepository.init();
+  @override
+  void initState() {
+    super.initState();
+    _appFuture = _initializeApp();
+  }
 
-    HttpOverrides.global = MyHttpOverrides();
+  Future<Widget> _initializeApp() async {
+    try {
+      // 1. Get shared preferences
+      final SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
 
-    if (!kIsWeb) {
-      FirebaseMessaging.onBackgroundMessage(
-        PushNotificationService.backgroundNotification,
-      );
-    }
+      // 2. Initialize Firebase
+      if (Firebase.apps.isNotEmpty) {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      } else {
+        await Firebase.initializeApp();
+      }
 
-    // Now run the actual app with all providers
-    runApp(
-      MultiProvider(
+      // 3. Initialize Hive
+      await Hive.initFlutter();
+      await HiveRepository.init();
+
+      HttpOverrides.global = MyHttpOverrides();
+
+      // 4. Load app settings (from your splash screen logic)
+      final data = await SystemRepository.fetchSystemSettings();
+      AppSettingsRepository.appSettings = AppSettingsModel.fromMap(data);
+
+      // 5. Check login status
+      final bool isLoggedIn = await getPrefrenceBool(isLogin);
+
+      // 6. Initialize Firebase messaging
+      if (!kIsWeb) {
+        FirebaseMessaging.onBackgroundMessage(
+          PushNotificationService.backgroundNotification,
+        );
+      }
+
+      // 7. Return the main app with all providers
+      return MultiProvider(
         providers: [
           ChangeNotifierProvider<HomeProvider>(
             create: (_) => HomeProvider(),
@@ -213,11 +252,9 @@ Future<void> _initializeApp() async {
             create: (_) => PushNotificationProvider(),
             lazy: true,
           ),
-
           ChangeNotifierProvider<AdvertisingPackageProvider>(
             create: (_) => AdvertisingPackageProvider(),
-          ), 
-
+          ),
           BlocProvider(
             create: (_) => PersonalConverstationsCubit(ChatRepository()),
             lazy: true,
@@ -259,68 +296,117 @@ Future<void> _initializeApp() async {
             lazy: true,
           ),
         ],
-        child: MyApp(sharedPreferences: sharedPreferences),
-      ),
-    );
-  } catch (e) {
-    print('Initialization error: $e');
-    // Fallback to error app if initialization fails
-    runApp(const ErrorApp());
+        child: MainAppContent(
+          sharedPreferences: sharedPreferences,
+          isLoggedIn: isLoggedIn,
+        ),
+      );
+    } catch (e) {
+      print('App initialization error: $e');
+      return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Initialization Failed', style: TextStyle(fontSize: 18)),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _appFuture = _initializeApp();
+                    });
+                  },
+                  child: Text('Retry'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
   }
-}
-
-// Simple splash screen loader
-class SplashLoader extends StatelessWidget {
-  const SplashLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 20),
-              Text('Loading...', style: TextStyle(fontSize: 16)),
-            ],
-          ),
-        ),
-      ),
+    return FutureBuilder<Widget>(
+      future: _appFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show simple loading screen while initializing
+          return MaterialApp(
+            home: Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 20),
+                    Text('Initializing app...', style: TextStyle(fontSize: 16)),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+
+        if (snapshot.hasError) {
+          return MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: Text(
+                  'Error loading app\n${snapshot.error}',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          );
+        }
+
+        return snapshot.data ??
+            MaterialApp(
+              home: Scaffold(body: Center(child: Text('App failed to load'))),
+            );
+      },
     );
   }
 }
 
-// Error fallback app
-class ErrorApp extends StatelessWidget {
-  const ErrorApp({super.key});
+// Main app content that decides whether to show Login or Dashboard
+class MainAppContent extends StatelessWidget {
+  final SharedPreferences sharedPreferences;
+  final bool isLoggedIn;
+
+  const MainAppContent({
+    Key? key,
+    required this.sharedPreferences,
+    required this.isLoggedIn,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text(
-            'App loading failed\nPlease restart the app',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18),
-          ),
-        ),
-      ),
+    // Decide which screen to show based on login status
+    final initialScreen = isLoggedIn ? const Dashboard() : const Login();
+
+    return MyApp(
+      sharedPreferences: sharedPreferences,
+      initialScreen: initialScreen,
     );
   }
 }
 
-//to get token without using context
-SettingProvider? globalSettingsProvider;
-GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-
+// Your existing MyApp class, modified to accept initialScreen
+// In main.dart, modify MyApp class
 class MyApp extends StatefulWidget {
   final SharedPreferences sharedPreferences;
+  final Widget? initialScreen; // Make it optional
 
-  const MyApp({Key? key, required this.sharedPreferences}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.sharedPreferences,
+    this.initialScreen, // Now optional
+  }) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -328,70 +414,93 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _isLanguageLoaded = false;
+  late Future<Widget> _initialScreenFuture;
 
   @override
   void initState() {
     globalSettingsProvider = SettingProvider(widget.sharedPreferences);
+
+    // If initialScreen is provided, use it, otherwise calculate it
+    if (widget.initialScreen != null) {
+      _initialScreenFuture = Future.value(widget.initialScreen!);
+    } else {
+      _initialScreenFuture = _determineInitialScreen();
+    }
+
     super.initState();
   }
 
-  @override
-  void didChangeDependencies() {
-    if (!_isLanguageLoaded) {
-      context.read<LanguageCubit>().loadCurrentLanguage();
-      _isLanguageLoaded = true;
+  Future<Widget> _determineInitialScreen() async {
+    try {
+      final bool isLoggedIn = await getPrefrenceBool(isLogin);
+      return isLoggedIn ? const Dashboard() : const Login();
+    } catch (e) {
+      return const Login(); // Fallback
     }
-    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LanguageCubit, LanguageState>(
-      builder: (context, languageState) => GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: MaterialApp(
-          builder: (context, child) {
-            return AnnotatedRegion<SystemUiOverlayStyle>(
-              value: const SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent,
-                statusBarIconBrightness: Brightness.dark,
-                systemNavigationBarColor: white,
-                systemNavigationBarIconBrightness: Brightness.dark,
-              ),
-              child: Scaffold(
-                backgroundColor: white,
-                body: SafeArea(bottom: true, top: false, child: child!),
-              ),
+      builder: (context, languageState) => FutureBuilder<Widget>(
+        future: _initialScreenFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return MaterialApp(
+              home: Scaffold(body: Center(child: CircularProgressIndicator())),
             );
-          },
-          title: appName,
-          navigatorKey: rootNavigatorKey,
-          theme: ThemeData(
-            useMaterial3: false,
-            primarySwatch: primary_app,
-            fontFamily: 'opensans',
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          locale: (languageState is LanguageLoader)
-              ? Locale(languageState.languageCode)
-              : Locale(defaultLanguageCode),
-          supportedLocales: appLanguages
-              .map(
-                (language) => getLocaleFromLanguageCode(language.languageCode),
-              )
-              .toList(),
-          localizationsDelegates: const [
-            AppLocalization.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          debugShowCheckedModeBanner: false,
-          home: const SplashScreen(),
-        ),
+          }
+
+          final homeScreen = snapshot.data ?? const Login();
+
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            child: MaterialApp(
+              builder: (context, child) {
+                return AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: const SystemUiOverlayStyle(
+                    statusBarColor: Colors.transparent,
+                    statusBarIconBrightness: Brightness.dark,
+                    systemNavigationBarColor: white,
+                    systemNavigationBarIconBrightness: Brightness.dark,
+                  ),
+                  child: Scaffold(
+                    backgroundColor: white,
+                    body: SafeArea(bottom: true, top: false, child: child!),
+                  ),
+                );
+              },
+              title: appName,
+              navigatorKey: rootNavigatorKey,
+              theme: ThemeData(
+                useMaterial3: false,
+                primarySwatch: primary_app,
+                fontFamily: 'opensans',
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+              ),
+              locale: (languageState is LanguageLoader)
+                  ? Locale(languageState.languageCode)
+                  : Locale(defaultLanguageCode),
+              supportedLocales: appLanguages
+                  .map(
+                    (language) =>
+                        getLocaleFromLanguageCode(language.languageCode),
+                  )
+                  .toList(),
+              localizationsDelegates: const [
+                AppLocalization.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              debugShowCheckedModeBanner: false,
+              home: homeScreen,
+            ),
+          );
+        },
       ),
     );
   }

@@ -39,9 +39,9 @@ class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
       const Home(),
       const OrdersScreen(),
       const ProductList(flag: "", fromNavbar: true),
-      AdvertisingPackagesScreen(
-        userId: (context.read<SettingProvider>().CUR_USERID ?? '0').toInt(),
-      ),
+      // AdvertisingPackagesScreen(
+      //   userId: (context.read<SettingProvider>().CUR_USERID ?? '0').toInt(),
+      // ),
       const ProfileAgain(),
     ];
     Future.delayed(Duration.zero, () {
