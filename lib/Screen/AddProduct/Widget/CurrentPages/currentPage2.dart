@@ -180,18 +180,18 @@ currentPage2(BuildContext context, Function update, Function updateCitys) {
         updateCitys,
       ),
       getCommanSizedBox(),
-      getPrimaryCommanText("Select Brand".translate(context: context), false),
-      getCommanSizedBox(),
-      getIconSelectionDesing(
-        "not Selected Yet!(ex. TaTa, Apple, MicroSoft)".translate(
-          context: context,
-        ),
-        13,
-        context,
-        update,
-        updateCitys,
-      ),
-      getCommanSizedBox(),
+      // getPrimaryCommanText("Select Brand".translate(context: context), false),
+      // getCommanSizedBox(),
+      // getIconSelectionDesing(
+      //   "not Selected Yet!(ex. TaTa, Apple, MicroSoft)".translate(
+      //     context: context,
+      //   ),
+      //   13,
+      //   context,
+      //   update,
+      //   updateCitys,
+      // ),
+      // getCommanSizedBox(),
       getPrimaryCommanText(
         "Select PickUp Location".translate(context: context),
         false,
