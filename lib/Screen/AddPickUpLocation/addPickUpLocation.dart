@@ -25,196 +25,206 @@ class _AddPickUpLocationState extends State<AddPickUpLocation>
 
   @override
   void initState() {
-    addPickUpLocationProvider =
-        Provider.of<AddPickUpLocationProvider>(context, listen: false);
+    addPickUpLocationProvider = Provider.of<AddPickUpLocationProvider>(
+      context,
+      listen: false,
+    );
     addPickUpLocationProvider!.freshInitializationOfAddPickUpLocation();
     addPickUpLocationProvider!.buttonController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
-    addPickUpLocationProvider!.buttonSqueezeanimation = Tween(
-      begin: width,
-      end: 50.0,
-    ).animate(
-      CurvedAnimation(
-        parent: addPickUpLocationProvider!.buttonController!,
-        curve: const Interval(
-          0.0,
-          0.150,
-        ),
-      ),
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
     );
+    addPickUpLocationProvider!.buttonSqueezeanimation =
+        Tween(begin: width, end: 50.0).animate(
+          CurvedAnimation(
+            parent: addPickUpLocationProvider!.buttonController!,
+            curve: const Interval(0.0, 0.150),
+          ),
+        );
     super.initState();
   }
 
   Widget addAllData() {
     return SingleChildScrollView(
-        child: Form(
-            key: _formkey,
-            child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 25.0,
-                  bottom: 20,
-                  right: 20.0,
-                  left: 20.0,
+      child: Form(
+        key: _formkey,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 25.0,
+            bottom: 20,
+            right: 20.0,
+            left: 20.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              getPrimaryCommanText(
+                "PickUp Location".translate(context: context),
+                false,
+              ),
+              getCommanSizedBox(),
+              getCommanInputTextField(
+                "Add PickUp Location".translate(context: context),
+                1,
+                0.06,
+                1,
+                1,
+                context,
+              ),
+              getCommanSizedBox(),
+              getPrimaryCommanText("Name".translate(context: context), false),
+              getCommanSizedBox(),
+              getCommanInputTextField(
+                "Shipper's Name".translate(context: context),
+                2,
+                0.06,
+                1,
+                2,
+                context,
+              ),
+              getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "Email".translate(context: context), false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "Shipper's Email Address".translate(context: context),
+              //   3,
+              //   0.06,
+              //   1,
+              //   5,
+              //   context,
+              // ),
+              // getCommanSizedBox(),
+              getPrimaryCommanText("Phone".translate(context: context), false),
+              getCommanSizedBox(),
+              getCommanInputTextField(
+                "Shipper's Phone Number".translate(context: context),
+                4,
+                0.06,
+                1,
+                4,
+                context,
+              ),
+              getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "City".translate(context: context), false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "PickUp Location City Name".translate(context: context),
+              //   5,
+              //   0.06,
+              //   1,
+              //   2,
+              //   context,
+              // ),
+              // getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "State".translate(context: context), false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "PickUp Location State Name"
+              //       .translate(context: context),
+              //   6,
+              //   0.06,
+              //   1,
+              //   2,
+              //   context,
+              // ),
+              getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "Country".translate(context: context), false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "PickUp Location Country Name"
+              //       .translate(context: context),
+              //   7,
+              //   0.06,
+              //   1,
+              //   2,
+              //   context,
+              // ),
+              // getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //   "Pincode".translate(context: context),
+              //   false,
+              // ),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "PickUp Location Pincode".translate(context: context),
+              //   8,
+              //   0.06,
+              //   1,
+              //   2,
+              //   context,
+              // ),
+              getCommanSizedBox(),
+              getPrimaryCommanText(
+                "Address".translate(context: context),
+                false,
+              ),
+              getCommanSizedBox(),
+              getCommanInputTextField(
+                "Shipper's Primary Address Max 80 Characters".translate(
+                  context: context,
                 ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      getPrimaryCommanText(
-                          "PickUp Location".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "Add PickUp Location".translate(context: context),
-                        1,
-                        0.06,
-                        1,
-                        1,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Name".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "Shipper's Name".translate(context: context),
-                        2,
-                        0.06,
-                        1,
-                        2,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Email".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "Shipper's Email Address".translate(context: context),
-                        3,
-                        0.06,
-                        1,
-                        5,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Phone".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "Shipper's Phone Number".translate(context: context),
-                        4,
-                        0.06,
-                        1,
-                        4,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "City".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "PickUp Location City Name".translate(context: context),
-                        5,
-                        0.06,
-                        1,
-                        2,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "State".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "PickUp Location State Name"
-                            .translate(context: context),
-                        6,
-                        0.06,
-                        1,
-                        2,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Country".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "PickUp Location Country Name"
-                            .translate(context: context),
-                        7,
-                        0.06,
-                        1,
-                        2,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Pincode".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "PickUp Location Pincode".translate(context: context),
-                        8,
-                        0.06,
-                        1,
-                        2,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Address".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "Shipper's Primary Address Max 80 Characters"
-                            .translate(context: context),
-                        9,
-                        0.11,
-                        1,
-                        1,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Additional Address".translate(context: context),
-                          false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "Additional Address Details"
-                            .translate(context: context),
-                        10,
-                        0.11,
-                        1,
-                        1,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Latitude".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "PickUp Location Latitude".translate(context: context),
-                        11,
-                        0.06,
-                        1,
-                        3,
-                        context,
-                      ),
-                      getCommanSizedBox(),
-                      getPrimaryCommanText(
-                          "Longitude".translate(context: context), false),
-                      getCommanSizedBox(),
-                      getCommanInputTextField(
-                        "PickUp Location Longitude".translate(context: context),
-                        12,
-                        0.06,
-                        1,
-                        3,
-                        context,
-                      ),
-                    ]))));
+                9,
+                0.11,
+                1,
+                1,
+                context,
+              ),
+              getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "Additional Address".translate(context: context),
+              //     false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "Additional Address Details"
+              //       .translate(context: context),
+              //   10,
+              //   0.11,
+              //   1,
+              //   1,
+              //   context,
+              // ),
+              // getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "Latitude".translate(context: context), false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "PickUp Location Latitude".translate(context: context),
+              //   11,
+              //   0.06,
+              //   1,
+              //   3,
+              //   context,
+              // ),
+              getCommanSizedBox(),
+              // getPrimaryCommanText(
+              //     "Longitude".translate(context: context), false),
+              // getCommanSizedBox(),
+              // getCommanInputTextField(
+              //   "PickUp Location Longitude".translate(context: context),
+              //   12,
+              //   0.06,
+              //   1,
+              //   3,
+              //   context,
+              // ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget getBottomBarButton() {
     return Padding(
-      padding:
-          const EdgeInsetsDirectional.symmetric(vertical: 8, horizontal: 10),
+      padding: const EdgeInsetsDirectional.symmetric(
+        vertical: 8,
+        horizontal: 10,
+      ),
       child: AppBtn(
         onBtnSelected: () async {
           validateAndSubmit();
@@ -229,9 +239,7 @@ class _AddPickUpLocationState extends State<AddPickUpLocation>
   }
 
   update() {
-    setState(
-      () {},
-    );
+    setState(() {});
   }
 
   Future<void> _playAnimation() async {
@@ -265,49 +273,56 @@ class _AddPickUpLocationState extends State<AddPickUpLocation>
           context,
         );
         return false;
-      } else if (addPickUpLocationProvider!.email == null ||
-          addPickUpLocationProvider!.email!.isEmpty) {
-        setSnackbar(
-          "Please Add Shipper's Email Address".translate(context: context),
-          context,
-        );
-        return false;
-      } else if (addPickUpLocationProvider!.phone == null ||
+      } 
+      // else if (addPickUpLocationProvider!.email == null ||
+      //     addPickUpLocationProvider!.email!.isEmpty) {
+      //   setSnackbar(
+      //     "Please Add Shipper's Email Address".translate(context: context),
+      //     context,
+      //   );
+      //   return false;
+      // }
+       else if (addPickUpLocationProvider!.phone == null ||
           addPickUpLocationProvider!.phone!.isEmpty) {
         setSnackbar(
           "Please Add Shipper's Phone".translate(context: context),
           context,
         );
         return false;
-      } else if (addPickUpLocationProvider!.city == null ||
+      } 
+      else if (addPickUpLocationProvider!.city == null ||
           addPickUpLocationProvider!.city!.isEmpty) {
         setSnackbar(
           "Please Add PickUp Location City Name".translate(context: context),
           context,
         );
         return false;
-      } else if (addPickUpLocationProvider!.state == null ||
+      } 
+      else if (addPickUpLocationProvider!.state == null ||
           addPickUpLocationProvider!.state!.isEmpty) {
         setSnackbar(
           "Please Add PickUp Location State Name".translate(context: context),
           context,
         );
         return false;
-      } else if (addPickUpLocationProvider!.country == null ||
+      } 
+      else if (addPickUpLocationProvider!.country == null ||
           addPickUpLocationProvider!.country!.isEmpty) {
         setSnackbar(
           "Please Add PickUp Location Country Name".translate(context: context),
           context,
         );
         return false;
-      } else if (addPickUpLocationProvider!.pinCode == null ||
+      } 
+      else if (addPickUpLocationProvider!.pinCode == null ||
           addPickUpLocationProvider!.pinCode!.isEmpty) {
         setSnackbar(
           "Please Add PickUp Location Pincode".translate(context: context),
           context,
         );
         return false;
-      } else if (addPickUpLocationProvider!.address == null ||
+      } 
+      else if (addPickUpLocationProvider!.address == null ||
           addPickUpLocationProvider!.address!.isEmpty) {
         setSnackbar(
           "Please Add Shipper's Primary Address".translate(context: context),
@@ -375,11 +390,7 @@ class _AddPickUpLocationState extends State<AddPickUpLocation>
                 borderRadius: BorderRadius.circular(circularBorderRadius5),
                 onTap: () => Navigator.of(context).pop(),
                 child: const Center(
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: white,
-                    size: 25,
-                  ),
+                  child: Icon(Icons.arrow_back, color: white, size: 25),
                 ),
               ),
             );

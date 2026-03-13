@@ -96,9 +96,9 @@
         <meta-data
             android:name="vn.hunghd.flutterdownloader.NOTIFICATION_ICON"
             android:resource="@mipmap/ic_launcher" />
-       <meta-data
+       <!-- <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/notification" />
+            android:resource="@mipmap/notification" /> -->
         
         <meta-data
             android:name="flutterEmbedding"
