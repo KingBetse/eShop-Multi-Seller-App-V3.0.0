@@ -18,6 +18,7 @@ import '../../Widget/snackbar.dart';
 import '../AddProduct/Add_Product.dart' as add;
 import '../../Widget/noNetwork.dart';
 import '../EmailSend/email.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Media extends StatefulWidget {
   final from, pos, type;
@@ -376,36 +377,21 @@ class _MediaState extends State<Media> with TickerProviderStateMixin {
   }
 
   videoFromGallery() async {
-    var result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: [
-        'mp4',
-        '3gp',
-        'avchd',
-        'avi',
-        'flv',
-        'mkv',
-        'mov',
-        'webm',
-        'wmv',
-        'mpg',
-        'mpeg',
-        'ogg'
-      ],
-    );
+    final ImagePicker picker = ImagePicker();
+    final XFile? result = await picker.pickVideo(source: ImageSource.gallery);
     if (result != null) {
-      File video = File(result.files.single.path!);
+      File video = File(result.path);
       setState(
         () {
           videoFromGellery = video;
-          result.names[0] == null
+          result.name == null
               ? setSnackbar(
                   "Error in video uploading please try again...!"
                       .translate(context: context),
                   context,
                 )
               : () {
-                  mediaProvider!.uploadedVideoName = result.names[0]!;
+                  mediaProvider!.uploadedVideoName = result.name;
                 }();
         },
       );
@@ -416,12 +402,10 @@ class _MediaState extends State<Media> with TickerProviderStateMixin {
   }
 
   imageFromGallery() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'eps'],
-    );
+    final ImagePicker picker = ImagePicker();
+    final XFile? result = await picker.pickImage(source: ImageSource.gallery);
     if (result != null) {
-      File image = File(result.files.single.path!);
+      File image = File(result.path);
       setState(
         () {
           mediaProvider!.selectedImageFromGellery = image;

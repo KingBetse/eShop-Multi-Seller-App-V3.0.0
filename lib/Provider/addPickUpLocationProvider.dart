@@ -113,21 +113,21 @@ class AddPickUpLocationProvider extends ChangeNotifier {
         request.headers.addAll(headers);
         request.fields[PICKUP_LOCATION] = pickUpLocation!;
         request.fields[Name] = name!;
-        request.fields[EmailText] = email!;
+        // request.fields[EmailText] = email!;
         request.fields[PHONE] = phone!;
-        request.fields[City] = city!;
-        request.fields[STATE] = state!;
-        request.fields[COUNTRY] = country!;
-        request.fields[Pincode] = pinCode!;
+        // request.fields[City] = city!;
+        // request.fields[STATE] = state!;
+        // request.fields[COUNTRY] = country!;
+        // request.fields[Pincode] = pinCode!;
         request.fields[Address] = address!;
 
         request.fields[Name] = name!;
 
-        request.fields[Address2] = address2!;
+        // request.fields[Address2] = address2!;
 
-        request.fields[Latitude] = latitude!;
+        // request.fields[Latitude] = latitude!;
 
-        request.fields[Longitude] = longitude!;
+        // request.fields[Longitude] = longitude!;
 
         print("request field****${request.fields}");
         var response = await request.send();

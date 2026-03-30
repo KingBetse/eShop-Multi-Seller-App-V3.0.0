@@ -86,8 +86,7 @@ class Content extends StatelessWidget {
                     permission = await Geolocator.requestPermission();
                   }
                   Position position = await Geolocator.getCurrentPosition(
-                    locationSettings:
-                        const LocationSettings(accuracy: LocationAccuracy.high),
+                    desiredAccuracy: LocationAccuracy.high,
                   );
                   Navigator.push(
                     context,

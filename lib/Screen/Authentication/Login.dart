@@ -58,11 +58,15 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     SystemChromeSettings.setSystemButtomNavigationBarithTopAndButtom();
     SystemChromeSettings.setSystemUIOverlayStyleWithDarkBrightNessStyle();
     super.initState();
-    context.read<LoginProvider>().buttonController = AnimationController(
+
+    // Create a fresh controller always starting at position 0
+    final controller = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
+    controller.reset(); // ensure button is never in loading state on entry
+    context.read<LoginProvider>().buttonController = controller;
 
     buttonSqueezeanimation = Tween(
-      begin: width * 0.7,
+      begin: (width > 0 ? width : 400.0) * 0.7,
       end: 50.0,
     ).animate(
       CurvedAnimation(

@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.8.0 <4.0.0" 
+  sdk: ">=3.6.0 <4.0.0" 
 
 dependencies:
   flutter:
@@ -30,7 +30,7 @@ dependencies:
       url: https://github.com/mohammadhprp/flutter_html_to_pdf2
   sms_autofill: ^2.3.1
   # image_picker: ^1.0.1
-  fl_chart: ^1.0.0
+  fl_chart: ^0.71.0
   file_picker: ^8.0.3
   sticky_headers: ^0.3.0+2
   html_editor_enhanced: ^2.5.1
@@ -42,7 +42,7 @@ dependencies:
   provider: ^6.0.5
   google_maps_flutter: ^2.2.2
   geocoding: ^4.0.0
-  geolocator: ^14.0.0
+  geolocator: ^12.0.0
   flutter_email_sender: ^7.0.0
   bloc: ^9.0.0
   intl_phone_field: ^3.1.0
@@ -54,7 +54,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   dio: ^5.4.0
   permission_handler: ^12.0.0+1
-  device_info_plus: ^11.4.0
+  device_info_plus: ^11.0.0
   meta: any
   http_parser: any
   collection: any
@@ -65,9 +65,9 @@ dependencies:
   sqflite: 2.4.1
   sqflite_android: 2.4.0
   sqflite_common: 2.5.4+6
-  image_picker: ^1.2.1
+  image_picker: ^1.1.2
 dependency_overrides:
-  webview_flutter_android: ^4.3.5
+  webview_flutter_android: 4.8.0
   intl: ^0.18.1
   chewie:
     git:

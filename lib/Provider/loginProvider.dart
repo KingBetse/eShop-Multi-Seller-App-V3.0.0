@@ -55,8 +55,10 @@ class LoginProvider extends ChangeNotifier {
           updateNow();
         }
       },
-      onError: (error) {
+      onError: (error) async {
+        await buttonController!.reverse();
         setSnackbarScafold(scaffoldMessengerKey, context, error.toString());
+        updateNow();
       },
     );
   }

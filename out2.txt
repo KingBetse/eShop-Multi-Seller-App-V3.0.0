@@ -1,0 +1,10 @@
+Resolving dependencies...
+Note: meta is pinned to version 1.15.0 by flutter_test from the flutter SDK.
+See https://dart.dev/go/sdk-version-pinning for details.
+
+The current Dart SDK version is 3.6.1.
+
+Because no versions of device_info_plus match >11.5.0 <12.0.0 and device_info_plus >=11.3.2 <11.5.0 depends on meta ^1.16.0, device_info_plus >=11.3.2 <11.5.0-∞ or >11.5.0 <12.0.0 requires meta ^1.16.0.
+And because every version of flutter_test from sdk depends on meta 1.15.0 and device_info_plus 11.5.0 requires SDK version >=3.7.0 <4.0.0, flutter_test from sdk is incompatible with device_info_plus ^11.3.2.
+So, because sellermultivendor depends on both device_info_plus ^11.4.0 and flutter_test from sdk, version solving failed.
+Failed to update packages.

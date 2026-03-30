@@ -1,0 +1,10 @@
+Resolving dependencies...
+The current Dart SDK version is 3.6.1.
+
+Because sellermultivendor depends on fl_chart >=1.0.0 which requires SDK version >=3.6.2 <4.0.0, version solving failed.
+
+
+You can try one of the following suggestions to make the pubspec resolve:
+* Try using the Flutter SDK version: 3.41.6. 
+* Consider downgrading your constraint on fl_chart: flutter pub add fl_chart:^0.71.0
+Failed to update packages.

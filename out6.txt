@@ -1,0 +1,35 @@
+Package wakelock:windows references wakelock_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+Ask the maintainers of wakelock to either avoid referencing a default implementation via `platforms: windows: default_package: wakelock_windows` or create a plugin named wakelock_windows.
+
+Package wakelock:windows references wakelock_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+Ask the maintainers of wakelock to either avoid referencing a default implementation via `platforms: windows: default_package: wakelock_windows` or create a plugin named wakelock_windows.
+
+
+Running Gradle task 'assembleProfile'...                        
+Package wakelock:windows references wakelock_windows:windows as the default plugin, but the package does not exist, or is not a plugin package.
+Ask the maintainers of wakelock to either avoid referencing a default implementation via `platforms: windows: default_package: wakelock_windows` or create a plugin named wakelock_windows.
+
+lib/Screen/Profile/Widget/content.dart:89:21: Error: No named parameter with the name 'locationSettings'.
+                    locationSettings:
+                    ^^^^^^^^^^^^^^^^
+../../../../../AppData/Local/Pub/Cache/hosted/pub.dev/geolocator-12.0.0/lib/geolocator.dart:103:27: Context: Found this candidate, but the arguments don't match.
+  static Future<Position> getCurrentPosition({
+                          ^^^^^^^^^^^^^^^^^^
+Target kernel_snapshot_program failed: Exception
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileFlutterBuildProfile'.
+> Process 'command 'C:\src\flutter\bin\flutter.bat'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3m 12s
+Running Gradle task 'assembleProfile'...                          193.1s
+Gradle task assembleProfile failed with exit code 1

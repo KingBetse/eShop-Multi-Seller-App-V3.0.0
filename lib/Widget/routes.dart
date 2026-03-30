@@ -19,8 +19,8 @@ import 'package:sellermultivendor/cubits/createGroupCubit.dart';
 import 'package:sellermultivendor/cubits/editGroupCubit.dart';
 import 'package:sellermultivendor/cubits/searchUserCubit.dart';
 import 'package:sellermultivendor/cubits/sendMessageCubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Screen/AddProduct/Add_Product.dart';
+import '../Screen/Authentication/Login.dart';
 import '../Screen/Authentication/SellerRegistration.dart';
 import '../Screen/Profile/Profile.dart';
 import '../Screen/SalesReport/SalesReport.dart';
@@ -34,17 +34,15 @@ class Routes {
     Navigator.pop(context);
   }
 
-  // simple routes
-  static navigateToMyApp(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (context.mounted) {
-      Navigator.push(
-        context,
-        CupertinoPageRoute(
-          builder: (context) => MyApp(sharedPreferences: prefs),
-        ),
-      );
-    }
+  // Navigate to Login screen (used on logout)
+  static navigateToMyApp(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const Login(),
+      ),
+      (route) => false,
+    );
   }
 
   static navigateToAddProduct(BuildContext context) {
